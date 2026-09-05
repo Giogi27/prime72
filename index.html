@@ -15,6 +15,7 @@
 </head>
 <body>
   <div class="noise"></div>
+
   <header class="top">
     <div class="brand" onclick="show('home')">
       <span class="logo-mark">72</span>
@@ -31,17 +32,8 @@
       <button data-view="pro" class="pro-btn">Pro</button>
     </nav>
   </header>
-    <section id="view-admin" class="view">
-      <div class="panel-head">
-        <h2>Admin pin</h2>
-        <p>Solo tu. Approva o elimina prima che compaiano in mappa.</p>
-      </div>
-      <input id="adminSecret" placeholder="password admin" style="padding:10px;border-radius:10px;border:0;width:280px" />
-      <button class="btn primary" type="button" onclick="loadPending()">Carica in attesa</button>
-      <div id="adminList" style="margin-top:16px"></div>
-    </section> 
+
   <main>
-    <!-- HOME -->
     <section id="view-home" class="view active">
       <div class="hero">
         <p class="kicker">GTA VI · 19 novembre 2026</p>
@@ -58,14 +50,12 @@
           <button class="btn ghost" onclick="show('quiz')">Che criminale sei?</button>
         </div>
       </div>
-
       <div class="stats">
         <div><b>19.11.26</b><span>Lock date Rockstar</span></div>
         <div><b>12.11.26</b><span>Inizio preload</span></div>
         <div><b>72h</b><span>Finestra che conta</span></div>
         <div><b>IT + EN</b><span>Community hub</span></div>
       </div>
-
       <div class="grid-3">
         <article class="card">
           <span class="tag">PRE</span>
@@ -75,7 +65,7 @@
         <article class="card">
           <span class="tag live">LIVE</span>
           <h3>Ticker scoperte</h3>
-          <p>Primo che trova X, server status, prezzi reali delle prime proprietà. Tipo Bloomberg, ma Vice City.</p>
+          <p>Primo che trova X, server status, prezzi reali delle prime proprietà.</p>
         </article>
         <article class="card">
           <span class="tag">POST</span>
@@ -85,11 +75,10 @@
       </div>
     </section>
 
-    <!-- MAP -->
     <section id="view-map" class="view">
       <div class="panel-head">
         <h2>Mappa Leonida</h2>
-        <p>Pin della community · prototipo con location dall’Extended Look</p>
+        <p>I pin nuovi restano nascosti finché non li approvi in Admin.</p>
       </div>
       <div class="map-wrap">
         <div id="map"></div>
@@ -104,42 +93,39 @@
             <option>Easter egg</option>
           </select>
           <textarea id="pinNote" rows="3" placeholder="Cosa hai riconosciuto e da quale trailer"></textarea>
-          <button class="btn primary full" onclick="addPin()">Pubblica pin</button>
-          <p class="hint">Clicca sulla mappa per scegliere il punto, poi pubblica. In produzione i pin vanno su database condiviso.</p>
+          <button class="btn primary full" type="button" onclick="addPin()">Pubblica pin</button>
+          <p class="hint">Clicca sulla mappa, poi pubblica. Online solo dopo il tuo ok.</p>
         </aside>
       </div>
     </section>
 
-    <!-- FEED -->
     <section id="view-feed" class="view">
       <div class="panel-head">
         <h2>Feed scoperte</h2>
-        <p>Simulazione live · al lancio qui arrivano report reali della community</p>
-      </div> 
-          <div class="pin-form" style="margin-bottom:14px;max-width:560px">
-      <h4>Nuova scoperta</h4>
-      <textarea id="discText" rows="3" placeholder="Es. Ho riconosciuto il porto a sud-est..."></textarea>
-      <button class="btn primary" type="button" onclick="addDiscovery()">Pubblica</button>
-    </div>
-    <div class="ticker" id="ticker"></div>
-    <div class="feed" id="feed"></div>
+        <p>Report della community</p>
+      </div>
+      <div class="pin-form" style="margin-bottom:14px;max-width:560px">
+        <h4>Nuova scoperta</h4>
+        <textarea id="discText" rows="3" placeholder="Es. Ho riconosciuto il porto a sud-est..."></textarea>
+        <button class="btn primary" type="button" onclick="addDiscovery()">Pubblica</button>
+      </div>
+      <div class="ticker" id="ticker"></div>
+      <div class="feed" id="feed"></div>
     </section>
 
-    <!-- QUIZ -->
     <section id="view-quiz" class="view">
       <div class="panel-head">
         <h2>Profilo criminale</h2>
-        <p>4 domande. Il risultato guida il tuo piano per le prime 72 ore.</p>
+        <p>4 domande. Il risultato guida il piano per le prime 72 ore.</p>
       </div>
       <div class="quiz" id="quizBox"></div>
     </section>
 
-    <!-- PRO -->
     <section id="view-pro" class="view">
       <div class="pro-hero">
         <p class="kicker">PRIME 72 PRO</p>
         <h2>Priorità nelle 72 ore che contano.</h2>
-        <p>Alert server, mappa HD, meta economia e matching crew. Paghi una volta per il lancio.</p>
+        <p>Alert server, mappa HD, meta economia e matching crew.</p>
         <div class="price">
           <strong>7,99 €</strong>
           <span>una tantum · Launch Pack</span>
@@ -150,10 +136,22 @@
           <li>Tracker prezzi proprietà e veicoli giorno 1–14</li>
           <li>Crew finder Italia + EU</li>
         </ul>
-        <button class="btn primary" onclick="fakeCheckout()">Sblocca Pro (demo)</button>
-                  <input id="alertEmail" placeholder="email per l’alert lancio" style="width:100%;margin:12px 0;padding:10px;border-radius:10px;border:0" />
-          <button class="btn ghost" type="button" onclick="saveAlert()">Avvisami il 19 novembre</button>        <p class="hint">Questa è la UI. Stripe si collega in deploy (chiave tua).</p>
+        <button class="btn primary" type="button" onclick="fakeCheckout()">Sblocca Pro (demo)</button>
+        <input id="alertEmail" placeholder="email per l’alert lancio" style="width:100%;margin:12px 0;padding:10px;border-radius:10px;border:0" />
+        <button class="btn ghost" type="button" onclick="saveAlert()">Avvisami il 19 novembre</button>
+        <p class="hint">Pagamento reale al giorno 4.</p>
       </div>
+    </section>
+
+    <section id="view-admin" class="view">
+      <div class="panel-head">
+        <h2>Centro controllo</h2>
+        <p>Vedi dove hanno messo il pin, poi approva o elimina.</p>
+      </div>
+      <input id="adminSecret" type="password" placeholder="password admin" />
+      <button class="btn primary" type="button" onclick="loadPending()">Carica in attesa</button>
+      <div id="adminMap"></div>
+      <div id="adminList"></div>
     </section>
   </main>
 
@@ -162,9 +160,10 @@
   </footer>
 
   <div id="toast" hidden></div>
-
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
 </body>
-</html>
+</html>   
+       
+        
