@@ -524,3 +524,58 @@ body::before { display: none !important; }
   height: 72px;
   box-shadow: 0 0 24px rgba(255,45,149,.35);
 }
+#view-dash { max-width: 1180px; }
+.cockpit {
+  background: linear-gradient(180deg, rgba(12,6,20,.88), rgba(8,4,14,.92));
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,.45);
+}
+.cockpit-top {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: 16px;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.22);
+}
+.cockpit-who h2 { font-size: 40px; line-height: .9; margin: 0; }
+.cockpit-who p { color: #b9a8c9; margin: 4px 0 0; }
+.cockpit-pips {
+  display: flex; gap: 8px;
+}
+.cockpit-pips div {
+  min-width: 72px; text-align: center;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  background: rgba(255,255,255,.03);
+}
+.cockpit-pips b {
+  display: block;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 22px;
+}
+.cockpit-pips i { font-style: normal; font-size: 10px; color: #b9a8c9; letter-spacing: .12em; text-transform: uppercase; }
+.cockpit-body {
+  display: grid;
+  grid-template-columns: 1.35fr .8fr;
+  gap: 12px;
+  padding: 14px;
+}
+.cockpit-side { display: grid; gap: 12px; }
+.hud {
+  background: rgba(18,10,28,.72);
+  border: 1px solid rgba(255,45,149,.18);
+  border-radius: 16px;
+  padding: 16px 16px 18px;
+  min-height: 160px;
+}
+.hud-main { min-height: 280px; }
+.hud h3 { margin: 6px 0 8px; }
+.dash-avatar { margin: 0; width: 64px; height: 64px; font-size: 24px; }
+@media (max-width: 900px) {
+  .cockpit-top, .cockpit-body { grid-template-columns: 1fr; }
+}
