@@ -24,8 +24,7 @@ body {
   background-size: cover;
   background-position: center 60%;
   background-attachment: fixed;
-}
-.top {
+}.top {
   position: sticky; top: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding: 14px 22px; backdrop-filter: blur(16px);
