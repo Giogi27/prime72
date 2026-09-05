@@ -30,6 +30,7 @@ function show(name) {
     b.classList.toggle("active", b.dataset.view === name);
   });
   if (name === "map") setTimeout(initMap, 60);
+  if (name === "admin") setTimeout(ensureAdminMap, 80);
 }
 document.querySelectorAll(".nav button").forEach((b) => {
   b.addEventListener("click", () => show(b.dataset.view));
@@ -68,7 +69,14 @@ const seedPins = [
   { lat: 25.73, lng: -80.24, title: "Residenziale interno", type: "Quartiere", note: "Case" }
 ];
 
-let map, pendingLatLng, userPins = loadJSON(STORE_PINS, []);
+let map, adminMap, pendingLatLng;
+
+function addTiles(target) {
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "&copy; OSM",
+    maxZoom: 19
+  }).addTo(target);
+}
 
 function initMap() {
   if (map) {
@@ -76,11 +84,8 @@ function initMap() {
     return;
   }
   map = L.map("map").setView([25.77, -80.18], 12);
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "&copy; OSM",
-    maxZoom: 19
-  }).addTo(map);
-  seedPins.concat(userPins).forEach(placePin);
+  addTiles(map);
+  seedPins.forEach(placePin);
   if (sb) {
     sb.from("pins").select("*").then(function (res) {
       (res.data || []).forEach(placePin);
@@ -175,9 +180,7 @@ async function addDiscovery() {
 }
 
 const ticker = document.getElementById("ticker");
-if (ticker) {
-  ticker.innerHTML = "<span>LAUNCH · 19 NOV 2026 &nbsp;|&nbsp; PRELOAD · 12 NOV</span>";
-}
+if (ticker) ticker.innerHTML = "<span>LAUNCH · 19 NOV 2026 &nbsp;|&nbsp; PRELOAD · 12 NOV</span>";
 renderFeed();
 
 const questions = [
@@ -229,6 +232,18 @@ function fakeCheckout() {
   localStorage.setItem("prime72_pro", "waitlist");
 }
 
+function ensureAdminMap() {
+  const el = document.getElementById("adminMap");
+  if (!el) return null;
+  if (adminMap) {
+    setTimeout(function () { adminMap.invalidateSize(); }, 80);
+    return adminMap;
+  }
+  adminMap = L.map("adminMap").setView([25.77, -80.18], 12);
+  addTiles(adminMap);
+  return adminMap;
+}
+
 async function loadPending() {
   const secret = document.getElementById("adminSecret").value.trim();
   const box = document.getElementById("adminList");
@@ -237,24 +252,52 @@ async function loadPending() {
     box.innerHTML = "<p>Accesso negato o errore: " + error.message + "</p>";
     return;
   }
+  const m = ensureAdminMap();
+  if (m) {
+    m.eachLayer(function (layer) {
+      if (layer instanceof L.Marker) m.removeLayer(layer);
+    });
+  }
   if (!data || !data.length) {
     box.innerHTML = "<p>Nessun pin in attesa.</p>";
     return;
   }
+  const bounds = [];
+  data.forEach(function (p) {
+    if (m) {
+      L.marker([p.lat, p.lng], { icon: pinIcon(p.type) })
+        .addTo(m)
+        .bindPopup("<strong>" + p.title + "</strong><br>" + p.type);
+      bounds.push([p.lat, p.lng]);
+    }
+  });
+  if (m && bounds.length) m.fitBounds(bounds, { padding: [28, 28] });
+
   box.innerHTML = data.map(function (p) {
-    return '<article class="card" style="margin-bottom:10px"><h3>' + p.title +
-      "</h3><p>" + p.type + " · " + (p.note || "") +
-      "</p><button class='btn primary' type='button' onclick='modPin(\"" + p.id +
-      "\", true)'>Approva</button> <button class='btn ghost' type='button' onclick='modPin(\"" +
-      p.id + "\", false)'>Elimina</button></article>";
+    const lat = Number(p.lat).toFixed(5);
+    const lng = Number(p.lng).toFixed(5);
+    return '<article class="card" style="margin-bottom:10px">' +
+      "<h3>" + p.title + "</h3>" +
+      "<p>" + (p.type || "") + " · " + (p.note || "nessuna nota") + "</p>" +
+      "<p>Coord: " + lat + ", " + lng + "</p>" +
+      '<button class="btn ghost" type="button" onclick="focusPending(' + p.lat + "," + p.lng + ')">Centra mappa</button> ' +
+      '<button class="btn primary" type="button" onclick="modPin(\'' + p.id + "', true)\">Approva</button> " +
+      '<button class="btn ghost" type="button" onclick="modPin(\'' + p.id + "', false)\">Elimina</button>" +
+      "</article>";
   }).join("");
 }
+
+function focusPending(lat, lng) {
+  const m = ensureAdminMap();
+  if (m) m.setView([lat, lng], 16);
+}
+
 async function modPin(id, ok) {
   const secret = document.getElementById("adminSecret").value.trim();
   const { error } = await sb.rpc("set_pin_approved", { pid: id, secret: secret, ok: ok });
   if (error) return toast(error.message);
   toast(ok ? "Approvato" : "Eliminato");
   loadPending();
-}
+} 
+  
 
- 
