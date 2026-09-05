@@ -3,7 +3,7 @@ const VAULT = [
   { title: "Guida preload", when: "2026-11-12", body: "Ordine download e installazione." },
   { title: "Guida prima notte", when: "2026-11-19", body: "Cosa fare ora 0-8." },
   { title: "Guida day-1", when: "2026-11-19", body: "Percorso del primo giorno." },
-  { title: "Cheat di gioco", when: "2026-11-19", body: "Il 19 novembre qui trovi i cheat se sono nel gioco. Quelli di Rockstar, non file esterni." },
+  { title: "Cheat di gioco", when: "2026-11-19", body: "Si apre il 19 novembre." },
   { title: "Guide mappa", when: "2026-11-19", body: "Cosa segnare e come spostarsi." }
 ];
 const BRIEFS = [
