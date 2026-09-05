@@ -88,9 +88,27 @@ function initMap() {
   });
 }
 
+function pinIcon(type) {
+  const mapType = {
+    Locale: "🍸",
+    Spiaggia: "🌴",
+    Quartiere: "🏙️",
+    Missione: "⭐",
+    "Easter egg": "🥚"
+  };
+  const emoji = mapType[type] || "📍";
+  return L.divIcon({
+    className: "p72-pin",
+    html: '<div class="p72-pin-inner">' + emoji + "</div>",
+    iconSize: [36, 36],
+    iconAnchor: [18, 36],
+    popupAnchor: [0, -28]
+  });
+}
+
 function placePin(p) {
   if (!map) return;
-  L.marker([p.lat, p.lng])
+  L.marker([p.lat, p.lng], { icon: pinIcon(p.type) })
     .addTo(map)
     .bindPopup("<strong>" + p.title + "</strong><br><em>" + p.type + "</em><br>" + (p.note || ""));
 }
