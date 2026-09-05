@@ -46,3 +46,20 @@
 .p72-pin-inner {
   box-shadow: 0 0 16px rgba(255,45,149,.65);
 }
+.race-board { display: grid; gap: 8px; max-width: 640px; }
+.race-row {
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  background: rgba(18,10,28,.72);
+}
+.race-row.top { border-color: rgba(255,45,149,.35); }
+.race-row b {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 22px;
+  color: #3df0ff;
+}
