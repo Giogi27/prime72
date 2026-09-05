@@ -5,18 +5,19 @@ module.exports = async function (req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "POST only" });
 
   const key = process.env.STRIPE_SECRET_KEY;
-  if (!key) return res.status(500).json({ error: "Manca STRIPE_SECRET_KEY su Vercel" });
+  if (!key) return res.status(500).json({ error: "Missing STRIPE_SECRET_KEY" });
 
   const origin = (req.headers.origin || "https://prime72.vercel.app").replace(/\/$/, "");
   const params = new URLSearchParams();
-  params.append("mode", "payment");
+  params.append("mode", "subscription");
   params.append("success_url", origin + "/#pro?paid=1");
   params.append("cancel_url", origin + "/#pro?cancel=1");
   params.append("line_items[0][quantity]", "1");
   params.append("line_items[0][price_data][currency]", "eur");
-  params.append("line_items[0][price_data][unit_amount]", "799");
-  params.append("line_items[0][price_data][product_data][name]", "PRIME 72 Launch Pack");
-  params.append("line_items[0][price_data][product_data][description]", "Vault, sala e console lancio");
+  params.append("line_items[0][price_data][unit_amount]", "499");
+  params.append("line_items[0][price_data][recurring][interval]", "month");
+  params.append("line_items[0][price_data][product_data][name]", "PRIME 72");
+  params.append("line_items[0][price_data][product_data][description]", "Console, map pins, vault, race — monthly");
 
   const r = await fetch("https://api.stripe.com/v1/checkout/sessions", {
     method: "POST",
