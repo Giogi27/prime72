@@ -45,6 +45,10 @@ html {
 .nav button:hover, .nav button.active { color: var(--text); border-color: var(--line); background: #1c1226; }
 .pro-btn { color: var(--gold) !important; }
 main { position: relative; z-index: 2; max-width: 1180px; margin: 0 auto; padding: 24px 20px 40px; }
+body:has(#view-map.active) main {
+  max-width: none; padding: 0; margin: 0;
+}
+body:has(#view-map.active) footer { display: none; }
 .view { display: none; }
 .view.active { display: block; }
 .kicker { color: var(--cyan); letter-spacing: .28em; font-size: 12px; text-transform: uppercase; margin-bottom: 10px; }
@@ -73,12 +77,40 @@ h1, h2 { text-shadow: 0 3px 22px rgba(0,0,0,.8); }
 .tag { font-size: 11px; letter-spacing: .14em; color: var(--gold); }
 .tag.live { color: #ff4d4d; }
 .panel-head { margin-bottom: 16px; }
-.radar-bar { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+#view-home, #view-feed, #view-quiz, #view-pro, #view-dash, #view-admin {
+  max-width: 1180px; margin: 0 auto; padding: 24px 20px 40px;
+}
+.map-stage {
+  position: relative;
+  height: calc(100vh - 72px);
+  min-height: 560px;
+}
+.map-stage #map {
+  position: absolute; inset: 0;
+  height: 100% !important;
+  border-radius: 0;
+  z-index: 1;
+}
+.radar-bar {
+  position: absolute; top: 16px; left: 16px; right: 340px;
+  z-index: 6; display: flex; flex-wrap: wrap; gap: 8px;
+}
 .radar-bar button {
-  background: rgba(10,6,18,.7); color: var(--muted); border: 1px solid var(--line);
+  background: rgba(10,6,18,.82); color: var(--muted); border: 1px solid var(--line);
   border-radius: 999px; padding: 8px 12px; cursor: pointer; font: inherit; font-size: 13px;
+  backdrop-filter: blur(10px);
 }
 .radar-bar button.active { color: #0a0612; background: var(--cyan); border-color: var(--cyan); }
+.map-dock {
+  position: absolute; top: 16px; right: 16px; bottom: 16px;
+  width: 310px; z-index: 6;
+  overflow: auto;
+  background: rgba(10,6,18,.88);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px;
+  padding: 16px;
+  backdrop-filter: blur(16px);
+}
 .radar-item {
   display: block; width: 100%; text-align: left; margin: 0 0 8px;
   background: #120818; color: var(--text); border: 1px solid var(--line);
@@ -87,12 +119,7 @@ h1, h2 { text-shadow: 0 3px 22px rgba(0,0,0,.8); }
 .radar-item b { display: block; }
 .radar-item span { color: var(--muted); font-size: 12px; }
 #radarList { max-height: 220px; overflow: auto; margin-top: 12px; }
-.map-wrap {
-  display: grid; grid-template-columns: 1fr 300px; gap: 12px;
-  background: rgba(8,4,14,.78); border: 1px solid var(--line);
-  border-radius: 20px; padding: 12px;
-}
-#map { height: 560px; border-radius: 14px; }
+.map-wrap { display: block; }
 .pin-form { background: rgba(12,8,20,.94); border: 1px solid rgba(255,255,255,.12); border-radius: 18px; padding: 18px; }
 .pin-form input, .pin-form select, .pin-form textarea,
 #view-pro input, #view-admin input, #dashEmail {
@@ -140,7 +167,7 @@ footer { position: relative; text-align: center; color: #9a8aa8; font-size: 12px
   display: flex; align-items: center; justify-content: center;
   font-size: 20px; background: #140c1c; border: 2px solid #ff2d95;
 }
-#view-admin { max-width: 720px; margin: 0 auto; padding: 24px 20px 48px; background: rgba(10,6,18,.78); border: 1px solid var(--line); border-radius: 20px; }
+#view-admin { background: rgba(10,6,18,.78); border: 1px solid var(--line); border-radius: 20px; }
 #adminMap { height: 340px; border-radius: 14px; margin: 16px 0; }
 .op-preview, .dash-avatar {
   width: 64px; height: 64px; border-radius: 50%;
@@ -173,8 +200,9 @@ footer { position: relative; text-align: center; color: #9a8aa8; font-size: 12px
 .crate h4 { font-size: 15px; margin: 4px 0 6px; }
 .crate .seal { font-size: 11px; letter-spacing: .12em; color: var(--gold); text-transform: uppercase; }
 @media (max-width: 900px) {
-  .map-wrap, .cockpit-top, .cockpit-body, .vault-grid, .tease,
+  .cockpit-top, .cockpit-body, .vault-grid, .tease,
   #view-pro .pro-hero { grid-template-columns: 1fr; }
   #view-pro .pin-form { position: static; }
-  #map { height: 380px; }
+  .radar-bar { right: 16px; }
+  .map-dock { position: absolute; top: auto; left: 12px; right: 12px; bottom: 12px; width: auto; max-height: 42%; }
 }
