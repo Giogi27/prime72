@@ -96,7 +96,7 @@
             <ol class="race-ol">
               <li data-i18n="race1">Attiva l’abbonamento mensile.</li>
               <li data-i18n="race2">Metti il tuo nome in Profilo.</li>
-              <li data-i18n="race3">Apri Mapa, tocca un punto, dai un nome, Invia.</li>
+              <li data-i18n="race3">Apri Mappa, tocca un punto, dai un nome, Invia.</li>
               <li data-i18n="race4">Se il pin è reale entra in classifica.</li>
             </ol>
             <button class="btn primary full" type="button" onclick="show('map')" data-i18n="raceDrop">Piazza un pin</button>
@@ -173,10 +173,12 @@
             </article>
             <article class="hud"><div id="myPins"></div></article>
             <article class="hud">
-              <p class="hint">Email usata su Stripe</p>
-              <input id="dashEmail" placeholder="email@..." />
+              <h3>Contattaci</h3>
+              <p class="hint">Problemi o idee. Arrivano in admin.</p>
+              <input id="dashEmail" placeholder="tua email" />
+              <textarea id="inboxText" rows="4" maxlength="1000" placeholder="Messaggio"></textarea>
+              <button class="btn primary full" type="button" onclick="sendInbox()">Invia</button>
               <button class="btn ghost full" type="button" onclick="cancelSubscription()">Disdici abbonamento</button>
-              <p class="hint" id="reentryHint">Si apre Stripe. Lì interrompi il rinnovo.</p>
             </article>
           </div>
         </div>
@@ -210,10 +212,12 @@
     </section>
     <section id="view-admin" class="view">
       <div class="panel-head"><h2>Admin</h2></div>
-      <input id="adminSecret" type="password" />
-      <button class="btn primary" type="button" onclick="loadPending()">Load</button>
+      <input id="adminSecret" type="password" placeholder="password admin" />
+      <button class="btn primary" type="button" onclick="loadPending()">Carica pin e messaggi</button>
       <div id="adminMap"></div>
       <div id="adminList"></div>
+      <h3 style="margin:18px 0 8px">Messaggi Contattaci</h3>
+      <div id="adminInbox"></div>
     </section>
   </main>
   <footer><p data-i18n="footer">Prototipo indipendente.</p></footer>
@@ -226,6 +230,7 @@
   <script src="map-skin.js"></script>
   <script src="vault.js"></script>
   <script src="sala.js"></script>
+  <script src="inbox.js"></script>
   <script src="race.js"></script>
   <script src="stripe-buy.js"></script>
 </body>
