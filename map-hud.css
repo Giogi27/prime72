@@ -46,20 +46,40 @@
 .p72-pin-inner {
   box-shadow: 0 0 16px rgba(255,45,149,.65);
 }
-.race-board { display: grid; gap: 8px; max-width: 640px; }
+#view-feed {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 28px 22px 80px;
+}
+.race-hero h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(42px, 7vw, 72px);
+  line-height: .9;
+  margin: 8px 0 12px;
+}
+.race-pos { color: #3df0ff; margin: 10px 0 16px; }
+.race-rules {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin: 22px 0 28px;
+  color: #b9a8c9;
+}
+.race-board { display: grid; gap: 8px; }
 .race-row {
   display: grid;
   grid-template-columns: 52px 1fr auto;
   gap: 12px;
   align-items: center;
-  padding: 12px 14px;
+  padding: 14px 16px;
   border: 1px solid rgba(255,255,255,.08);
-  border-radius: 14px;
-  background: rgba(18,10,28,.72);
+  border-radius: 16px;
+  background: rgba(10,6,18,.72);
+  backdrop-filter: blur(12px);
 }
-.race-row.top { border-color: rgba(255,45,149,.35); }
+.race-row.top { border-color: rgba(255,45,149,.4); box-shadow: 0 0 24px rgba(255,45,149,.12); }
 .race-row b {
   font-family: "Bebas Neue", sans-serif;
-  font-size: 22px;
+  font-size: 24px;
   color: #3df0ff;
 }
