@@ -143,3 +143,26 @@ footer { text-align: center; color: #6d5b7a; font-size: 12px; padding: 0 20px 40
   border: 2px solid #ff2d95;
   box-shadow: 0 8px 20px rgba(0,0,0,.45);
 }
+#view-admin {
+  max-width: 720px;
+  margin: 24px auto 80px;
+  padding: 28px 20px 48px;
+  background: rgba(10,6,18,.78);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+}
+#view-admin h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 56px;
+  line-height: .95;
+  text-shadow: 0 2px 18px rgba(0,0,0,.75);
+}
+#view-admin input {
+  background: #140c1c;
+  color: #fff;
+  margin-right: 10px;
+  margin-bottom: 12px;
+}
+#view-admin .card {
+  background: #1a1024;
+}
