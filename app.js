@@ -29,7 +29,10 @@ function show(name) {
   });
   if (name === "map") setTimeout(initMap, 60);
 }
-document.querySelectorAll(".nav button").forEach((b) => {
+window.addEventListener("hashchange", function () {
+  if (location.hash === "#admin") show("admin");
+});
+if (location.hash === "#admin") show("admin");document.querySelectorAll(".nav button").forEach((b) => {
   b.addEventListener("click", () => show(b.dataset.view));
 });
 
