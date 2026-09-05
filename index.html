@@ -51,15 +51,29 @@
       </div>
     </section>
     <section id="view-map" class="view">
-      <div class="panel-head"><h2>Mappa</h2></div>
+      <div class="panel-head">
+        <h2>Radar</h2>
+        <p>Clicca la mappa, dai un nome, filtra i segnali.</p>
+      </div>
+      <div class="radar-bar">
+        <button type="button" class="active" data-filter="Tutti" onclick="setMapFilter('Tutti')">Tutti</button>
+        <button type="button" data-filter="Locale" onclick="setMapFilter('Locale')">Locale</button>
+        <button type="button" data-filter="Spiaggia" onclick="setMapFilter('Spiaggia')">Spiaggia</button>
+        <button type="button" data-filter="Quartiere" onclick="setMapFilter('Quartiere')">Quartiere</button>
+        <button type="button" data-filter="Missione" onclick="setMapFilter('Missione')">Missione</button>
+        <button type="button" data-filter="Easter egg" onclick="setMapFilter('Easter egg')">Easter egg</button>
+      </div>
       <div class="map-wrap">
         <div id="map"></div>
         <aside class="pin-form">
-          <h4>Nuovo pin</h4>
+          <p class="hint" id="mapHint">1. Tocca la mappa &nbsp; 2. Nome &nbsp; 3. Invia. Online solo dopo approvazione.</p>
+          <h4>Nuovo segnale</h4>
           <input id="pinTitle" placeholder="Nome location" />
           <select id="pinType"><option>Locale</option><option>Spiaggia</option><option>Quartiere</option><option>Missione</option><option>Easter egg</option></select>
-          <textarea id="pinNote" rows="3" placeholder="Nota"></textarea>
-          <button class="btn primary full" type="button" onclick="addPin()">Invia per approvazione</button>
+          <textarea id="pinNote" rows="2" placeholder="Nota corta"></textarea>
+          <button class="btn primary full" type="button" onclick="addPin()">Invia al radar</button>
+          <p class="kicker" style="margin-top:16px" id="radarCount">0 segnali</p>
+          <div id="radarList"></div>
         </aside>
       </div>
     </section>
@@ -174,6 +188,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
+  <script src="map-radar.js"></script>
   <script src="vault.js"></script>
   <script src="sala.js"></script>
   <script src="stripe-buy.js"></script>
