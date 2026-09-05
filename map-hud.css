@@ -1,7 +1,9 @@
-#map .leaflet-tile-pane {
-  filter: invert(1) hue-rotate(190deg) saturate(1.35) brightness(0.72) contrast(1.2);
-}
 #map .leaflet-container {
-  background: #07040c;
+  background: #0a1220;
   cursor: crosshair;
+}
+#map .leaflet-control-zoom a {
+  background: rgba(10,6,18,.88) !important;
+  color: #fff !important;
+  border: 0 !important;
 }
