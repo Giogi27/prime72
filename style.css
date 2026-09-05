@@ -60,6 +60,30 @@ h1 { font-size: clamp(42px, 8vw, 84px); }
 h2 { font-size: clamp(32px, 5vw, 56px); }
 .lead { max-width: 560px; color: var(--muted); margin: 16px 0 28px; font-size: 17px; }
 h1, .lead { text-shadow: 0 2px 18px rgba(0,0,0,.75); }
+.fan-stamp {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 8px 12px;
+  border: 1px solid rgba(245,193,90,.45);
+  border-radius: 8px;
+  background: rgba(10,6,18,.55);
+  transform: rotate(-2deg);
+}
+.fan-stamp b {
+  display: block;
+  font-family: Outfit, sans-serif;
+  font-size: 12px;
+  letter-spacing: .18em;
+  color: #fff;
+}
+.fan-stamp i {
+  display: block;
+  margin-top: 3px;
+  font-style: normal;
+  font-size: 10px;
+  letter-spacing: .08em;
+  color: var(--gold);
+}
 .countdown { display: flex; gap: 10px; margin-bottom: 24px; }
 .countdown div {
   min-width: 78px; padding: 14px 10px; text-align: center;
@@ -87,7 +111,6 @@ h1, .lead { text-shadow: 0 2px 18px rgba(0,0,0,.75); }
 }
 .tease b { display: block; font-size: 11px; letter-spacing: .14em; color: var(--gold); }
 .tease span { display: block; margin-top: 6px; font-size: 13px; color: #ddd; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
 .tag { font-size: 11px; letter-spacing: .14em; color: var(--gold); }
 .tag.live { color: #ff4d4d; }
 .panel-head { margin-bottom: 16px; }
