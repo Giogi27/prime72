@@ -5,6 +5,9 @@
 #map .leaflet-tile-pane {
   filter: saturate(1.15) contrast(1.08) brightness(0.9);
 }
+#map.night .leaflet-tile-pane {
+  filter: saturate(1.35) contrast(1.2) brightness(0.52) hue-rotate(8deg);
+}
 #map .leaflet-control-zoom {
   border: 0 !important;
   margin: 72px 0 0 16px !important;
