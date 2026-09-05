@@ -94,7 +94,7 @@
       <div class="pin-form" style="max-width:520px">
         <input id="opName" placeholder="Nome in strada" />
         <input id="opCrew" placeholder="Tag crew (es. VC-72)" />
-        <label class="hint">Foto (resta sul tuo browser per ora)</label>
+        <label class="hint">Foto sotto 700KB, JPEG</label>
         <input id="opPhoto" type="file" accept="image/*" />
         <div id="opPreview" class="op-preview"></div>
         <button class="btn primary" type="button" onclick="saveOperator()">Salva identità</button>
@@ -103,50 +103,49 @@
     </section>
 
     <section id="view-dash" class="view">
-      <div class="dash">
-        <div class="dash-id">
+      <div class="cockpit">
+        <header class="cockpit-top">
           <div class="dash-avatar" id="dashAvatar">72</div>
-          <div>
-            <p class="kicker">CONSOLE PRO</p>
+          <div class="cockpit-who">
+            <span class="kicker">CONSOLE PRO</span>
             <h2 id="dashName">Operatore</h2>
             <p id="dashCrew">senza crew</p>
           </div>
-          <div class="dash-status">
-            <b>LIVE</b>
-            <span>Pack attivo · demo</span>
+          <div class="cockpit-pips">
+            <div><b id="kpiPins">0</b><i>pin</i></div>
+            <div><b>12.11</b><i>preload</i></div>
+            <div><b>19.11</b><i>drop</i></div>
+            <div><b>72h</b><i>finestra</i></div>
           </div>
-        </div>
-        <div class="dash-kpis">
-          <div><b id="kpiPins">0</b><span>pin firmati</span></div>
-          <div><b>12.11</b><span>preload</span></div>
-          <div><b>19.11</b><span>drop</span></div>
-          <div><b>72h</b><span>finestra</span></div>
-        </div>
-        <div class="dash-grid">
-          <article class="card">
+          <div class="dash-status"><b>LIVE</b><span>demo pack</span></div>
+        </header>
+        <div class="cockpit-body">
+          <article class="hud hud-main">
             <span class="tag">PLAYBOOK</span>
-            <h3>Le 72 ore</h3>
+            <h3>Protocollo 72h</h3>
             <ol class="play">
-              <li>Preload il 12. Niente update a ridosso del drop.</li>
-              <li>Notte 1: tetto, mezzo, non inseguire ogni icona.</li>
-              <li>Giorno 1: un income ripetibile e 3 pin veri.</li>
-              <li>Ore 24–72: crew e prezzi. Vince chi ha già la mappa.</li>
+              <li><b>T-7</b> Preload il 12. Niente update la sera del 18.</li>
+              <li><b>H0–H3</b> Tetto, mezzo, non inseguire ogni icona.</li>
+              <li><b>H3–H24</b> Un income ripetibile + 3 pin veri.</li>
+              <li><b>H24–H72</b> Crew e prezzi. Vince chi ha già la mappa.</li>
             </ol>
           </article>
-          <article class="card">
-            <span class="tag live">ALERT</span>
-            <h3>Coda lancio</h3>
-            <ul class="play">
-              <li>Store EU — fascia oraria IT da confermare</li>
-              <li>Server status — vuoto finché non aprono</li>
-              <li>Hotfix day-1 — canale Pro</li>
-            </ul>
-          </article>
-          <article class="card">
-            <span class="tag">IDENTITÀ</span>
-            <h3>I tuoi pin</h3>
-            <div id="myPins">Salva un nome in Profilo, poi piazza un pin.</div>
-          </article>
+          <div class="cockpit-side">
+            <article class="hud">
+              <span class="tag live">ALERT</span>
+              <h3>Coda</h3>
+              <ul class="play">
+                <li>Store EU — orario IT TBD</li>
+                <li>Server — chiusi</li>
+                <li>Hotfix day-1 — canale Pro</li>
+              </ul>
+            </article>
+            <article class="hud">
+              <span class="tag">SIGNAL</span>
+              <h3>I tuoi pin</h3>
+              <div id="myPins">Nome in Profilo, poi un pin in Mappa.</div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -180,7 +179,4 @@
   </footer>
   <div id="toast" hidden></div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="app.js"></script>
-</body>
-</html>
+  <script src="https://cdn.jsdel
