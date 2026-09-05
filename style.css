@@ -15,8 +15,16 @@ html, body { background: var(--bg); color: var(--text); font-family: Outfit, sys
   pointer-events: none; position: fixed; inset: 0; opacity: .07; z-index: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-body { background: radial-gradient(1200px 600px at 80% -10%, #3a1638 0%, transparent 50%), radial-gradient(800px 400px at 0% 20%, #0d3a44 0%, transparent 45%), var(--bg); }
-
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(180deg, rgba(10,6,18,.55) 0%, rgba(10,6,18,.78) 45%, rgba(10,6,18,.92) 100%),
+    radial-gradient(900px 420px at 80% 0%, rgba(255,45,149,.25), transparent 55%),
+    url("https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1920&q=80");
+  background-size: cover;
+  background-position: center 30%;
+  background-attachment: fixed;
+}
 .top {
   position: sticky; top: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
