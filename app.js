@@ -116,9 +116,9 @@ const seedPins = [
 let map, adminMap, pendingLatLng;
 
 function addTiles(target) {
-  L.tileLayer("https://cartodb-basemaps-a.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png", {
-    attribution: "Carto",
-    maxZoom: 18
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "OSM",
+    maxZoom: 19
   }).addTo(target);
 }
 
