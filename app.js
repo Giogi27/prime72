@@ -7,6 +7,7 @@ const STORE_CHECK = "p72_check";
 const SB_URL = "https://soskkfqeudtqfarzjlal.supabase.co";
 const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvc2trZnFldWR0cWZhcnpqbGFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1ODg5NzIsImV4cCI6MjEwNDE2NDk3Mn0.zxvsRI0_PHU5-xCvpgJlWySnBbCemxbPuI6Zpx7HQLw";
 const sb = window.supabase ? window.supabase.createClient(SB_URL, SB_KEY) : null;
+const ZONE = [[25.64, -80.38], [25.89, -80.11]];
 
 const CHECKS = [
   "Profilo salvato (nome + crew)",
@@ -41,13 +42,11 @@ function hasSession() {
 function hasPack() {
   return !!loadJSON(STORE_PACK, null);
 }
-
 function currentView() {
   const h = (location.hash || "#home").replace("#", "").trim();
   const ok = ["home", "map", "feed", "quiz", "pro", "dash", "admin"];
   return ok.indexOf(h) >= 0 ? h : "home";
 }
-
 function show(name, skipHash) {
   if (name === "dash" && !hasSession()) {
     toast("Entra da Pro con nome e codice pack.");
@@ -65,19 +64,16 @@ function show(name, skipHash) {
   if (name === "dash") renderDash();
   if (name === "pro") prefillLogin();
 }
-
 function goConsoleOrPro() {
   if (hasSession()) show("dash");
   else show("pro");
 }
-
 document.querySelectorAll(".nav button").forEach((b) => {
   b.addEventListener("click", () => show(b.dataset.view));
 });
 window.addEventListener("hashchange", function () {
   show(currentView(), true);
 });
-
 function toast(msg) {
   const t = document.getElementById("toast");
   if (!t) return;
@@ -86,7 +82,6 @@ function toast(msg) {
   clearTimeout(toast._id);
   toast._id = setTimeout(() => (t.hidden = true), 2800);
 }
-
 function loadJSON(key, fallback) {
   try {
     const raw = localStorage.getItem(key);
@@ -98,14 +93,12 @@ function loadJSON(key, fallback) {
 function saveJSON(key, val) {
   localStorage.setItem(key, JSON.stringify(val));
 }
-
 function getOp() {
   const op = loadJSON(STORE_OP, { name: "", crew: "", photo: "" });
   if (!op.name) op.name = localStorage.getItem("p72_name") || "";
   if (!op.crew) op.crew = localStorage.getItem("p72_crew") || "";
   return op;
 }
-
 function refreshNav() {
   const dash = document.getElementById("navDash");
   if (dash) dash.hidden = !hasSession();
@@ -123,19 +116,30 @@ const seedPins = [
 let map, adminMap, pendingLatLng;
 
 function addTiles(target) {
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "&copy; OSM",
-    maxZoom: 19
+  L.tileLayer("https://cartodb-basemaps-a.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png", {
+    attribution: "Carto",
+    maxZoom: 18
   }).addTo(target);
+}
+
+function lockZone(target) {
+  if (!target) return;
+  const b = L.latLngBounds(ZONE);
+  target.setMinZoom(11);
+  target.setMaxZoom(16);
+  target.setMaxBounds(b.pad(0.03));
+  target.fitBounds(b);
 }
 
 function initMap() {
   if (map) {
     map.invalidateSize();
+    lockZone(map);
     return;
   }
-  map = L.map("map").setView([25.77, -80.18], 12);
+  map = L.map("map", { zoomControl: true, attributionControl: false }).setView([25.77, -80.18], 13);
   addTiles(map);
+  lockZone(map);
   seedPins.forEach(placePin);
   if (sb) {
     sb.from("pins").select("*").eq("approved", true).then(function (res) {
@@ -218,7 +222,6 @@ async function renderFeed() {
       (r.votes || 1) + "</span> community</div><p>" + (r.body || "") + "</p></article>";
   }).join("");
 }
-
 async function addDiscovery() {
   const input = document.getElementById("discText");
   const text = (input && input.value ? input.value : "").trim();
@@ -229,7 +232,6 @@ async function addDiscovery() {
   toast("Pubblicata.");
   renderFeed();
 }
-
 const ticker = document.getElementById("ticker");
 if (ticker) ticker.innerHTML = "<span>LAUNCH \u00b7 19 NOV 2026 &nbsp;|&nbsp; PRELOAD \u00b7 12 NOV</span>";
 renderFeed();
@@ -247,7 +249,6 @@ const profiles = [
   { name: "Operatore", blurb: "Launch Pack." }
 ];
 let qi = 0, score = [0, 0, 0, 0];
-
 function renderQuiz() {
   const box = document.getElementById("quizBox");
   if (!box) return;
@@ -303,7 +304,6 @@ function saveOperator() {
   };
   img.src = url;
 }
-
 function paintOpPreview() {
   const op = getOp();
   const box = document.getElementById("opPreview");
@@ -317,7 +317,6 @@ function paintOpPreview() {
   if (c && !c.value) c.value = op.crew;
 }
 paintOpPreview();
-
 function prefillLogin() {
   const op = getOp();
   const pack = loadJSON(STORE_PACK, null);
@@ -326,7 +325,6 @@ function prefillLogin() {
   if (n && !n.value) n.value = op.name || "";
   if (c && !c.value && pack && pack.code) c.value = pack.code;
 }
-
 function activatePack() {
   const name = ((document.getElementById("loginName") || {}).value || getOp().name || "").trim();
   const code = ((document.getElementById("loginCode") || {}).value || "").trim();
@@ -342,7 +340,6 @@ function activatePack() {
   toast("Pack attivo. Conserva il codice " + code);
   show("dash");
 }
-
 function loginConsole() {
   const name = ((document.getElementById("loginName") || {}).value || "").trim();
   const code = ((document.getElementById("loginCode") || {}).value || "").trim();
@@ -354,14 +351,12 @@ function loginConsole() {
   toast("Bentornato, " + pack.name);
   show("dash");
 }
-
 function logoutConsole() {
   localStorage.removeItem(STORE_SESSION);
   refreshNav();
   toast("Uscito. Rientri da Pro con nome + codice.");
   show("home");
 }
-
 function renderChecks() {
   const box = document.getElementById("checkList");
   if (!box) return;
@@ -381,14 +376,12 @@ function renderChecks() {
   });
   updateKpiCheck();
 }
-
 function updateKpiCheck() {
   const state = loadJSON(STORE_CHECK, []);
   const done = state.filter(Boolean).length;
   const el = document.getElementById("kpiDone");
   if (el) el.textContent = done + "/" + CHECKS.length;
 }
-
 function renderDash() {
   const op = getOp();
   const pack = loadJSON(STORE_PACK, null);
@@ -409,7 +402,6 @@ function renderDash() {
   renderChecks();
   loadMyPins();
 }
-
 async function loadMyPins() {
   const box = document.getElementById("myPins");
   const kpi = document.getElementById("kpiPins");
@@ -432,7 +424,6 @@ async function loadMyPins() {
     return "<p><strong>" + p.title + "</strong> \u00b7 " + (p.approved ? "LIVE" : "in coda") + "</p>";
   }).join("");
 }
-
 function saveAlert() {
   const email = (document.getElementById("alertEmail") || {}).value || "";
   if (!email.includes("@")) return toast("Email non valida.");
@@ -445,7 +436,6 @@ function saveAlertFromDash() {
   saveJSON(STORE_ALERT, { email: email, at: Date.now() });
   toast("Alert salvato.");
 }
-
 function ensureAdminMap() {
   const el = document.getElementById("adminMap");
   if (!el) return null;
@@ -457,7 +447,6 @@ function ensureAdminMap() {
   addTiles(adminMap);
   return adminMap;
 }
-
 async function loadPending() {
   const secret = document.getElementById("adminSecret").value.trim();
   const box = document.getElementById("adminList");
@@ -495,12 +484,10 @@ async function loadPending() {
       '<button class="btn ghost" type="button" onclick="modPin(\'' + p.id + '\', false)">Elimina</button></article>';
   }).join("");
 }
-
 function focusPending(lat, lng) {
   const m = ensureAdminMap();
   if (m) m.setView([lat, lng], 16);
 }
-
 async function modPin(id, ok) {
   const secret = document.getElementById("adminSecret").value.trim();
   const { error } = await sb.rpc("set_pin_approved", { pid: id, secret: secret, ok: ok });
@@ -508,5 +495,4 @@ async function modPin(id, ok) {
   toast(ok ? "Approvato" : "Eliminato");
   loadPending();
 }
-
 show(currentView(), true);
