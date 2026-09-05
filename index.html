@@ -107,9 +107,14 @@
       <div class="panel-head">
         <h2>Feed scoperte</h2>
         <p>Simulazione live · al lancio qui arrivano report reali della community</p>
-      </div>
-      <div class="ticker" id="ticker"></div>
-      <div class="feed" id="feed"></div>
+      </div> 
+          <div class="pin-form" style="margin-bottom:14px;max-width:560px">
+      <h4>Nuova scoperta</h4>
+      <textarea id="discText" rows="3" placeholder="Es. Ho riconosciuto il porto a sud-est..."></textarea>
+      <button class="btn primary" type="button" onclick="addDiscovery()">Pubblica</button>
+    </div>
+    <div class="ticker" id="ticker"></div>
+    <div class="feed" id="feed"></div>
     </section>
 
     <!-- QUIZ -->
