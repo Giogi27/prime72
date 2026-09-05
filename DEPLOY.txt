@@ -1,1 +1,1 @@
-deploy 2026-09-05-17-42 command
+deploy-command-1747
