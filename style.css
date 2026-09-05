@@ -443,25 +443,29 @@ async function modPin(id, ok) {
 .dash { max-width: 920px; }
 html, body {
   min-height: 100%;
+  overflow-x: hidden;
 }
 body {
   background-size: cover !important;
-  background-position: center 30% !important;
+  background-position: center 42% !important;
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
 }
 #view-home.view.active {
-  min-height: calc(100vh - 72px);
-  padding-bottom: 28px;
+  min-height: auto;
+  padding: 12px 20px 56px;
 }
 .hero {
-  min-height: calc(100vh - 140px);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding-bottom: 24px;
+  min-height: auto !important;
+  display: block;
+  padding-bottom: 0;
 }
 footer {
-  background: rgba(10,6,18,.72);
-  padding: 16px 20px;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10,6,18,.55);
+  padding: 8px 20px;
+  font-size: 12px;
 }
