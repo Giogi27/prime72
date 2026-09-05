@@ -1,5 +1,7 @@
 const ZONE = L.latLngBounds([25.62, -80.42], [26.02, -80.08]);
 
+window.lockZone = function () {};
+
 function restyleMap(target) {
   if (!target || target._skinned) return;
   target._skinned = true;
@@ -12,7 +14,7 @@ function restyleMap(target) {
   }).addTo(target);
   target.setMinZoom(10);
   target.setMaxZoom(17);
-  target.setMaxBounds(ZONE.pad(0.15));
+  target.setMaxBounds(ZONE.pad(0.2));
 }
 
 window.addTiles = function (target) {
