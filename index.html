@@ -31,7 +31,15 @@
       <button data-view="pro" class="pro-btn">Pro</button>
     </nav>
   </header>
-
+    <section id="view-admin" class="view">
+      <div class="panel-head">
+        <h2>Admin pin</h2>
+        <p>Solo tu. Approva o elimina prima che compaiano in mappa.</p>
+      </div>
+      <input id="adminSecret" placeholder="password admin" style="padding:10px;border-radius:10px;border:0;width:280px" />
+      <button class="btn primary" type="button" onclick="loadPending()">Carica in attesa</button>
+      <div id="adminList" style="margin-top:16px"></div>
+    </section> 
   <main>
     <!-- HOME -->
     <section id="view-home" class="view active">
