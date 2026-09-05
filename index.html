@@ -136,27 +136,27 @@
     </section>
     <section id="view-pro" class="view">
       <div class="pro-hero">
-        <p class="kicker">LAUNCH PACK · 7,99 € una tantum</p>
-        <h2>Il 19 novembre<br>non partire a caso.</h2>
-        <p class="lead">Mentre gli altri aspettano il download, tu hai già console, piano e sala. Il gioco lo hanno tutti. Il primo giro no.</p>
-        <ul class="perks">
-          <li><strong>12 novembre</strong> — si apre il dossier preload: cosa scaricare, in che ordine, cosa non toccare la sera prima.</li>
-          <li><strong>19 novembre</strong> — si apre il piano delle prime 72 ore: prima notte, primo mezzo, primo giro utile.</li>
-          <li><strong>Sala chiusa</strong> — solo chi ha il pack. Niente commenti a caso sotto un Reel.</li>
-          <li><strong>Pin col tuo nome</strong> — sulla mappa si legge che l hai trovato tu.</li>
-          <li><strong>Alert</strong> — ti teniamo sul 12 e sul 19, non sul gossip.</li>
-        </ul>
-        <div class="price"><strong>7,99 €</strong><span>una volta. Poi la console è tua su questo browser.</span></div>
-        <div class="pin-form" style="margin:18px 0">
-          <h4>1. Scegli identita</h4>
-          <label class="hint">Nome che apparira sui pin e in sala</label>
-          <input id="loginName" placeholder="Es. Enrico" />
-          <label class="hint">Codice tuo, servira per rientrare (min 4 caratteri)</label>
-          <input id="loginCode" placeholder="Es. VC72EN" />
-          <h4 style="margin-top:14px">2. Entra</h4>
-          <button class="btn primary full" type="button" onclick="payWithStripe()">Paga 7,99 € con Stripe</button>
-          <button class="btn ghost full" type="button" onclick="activatePack()">Attiva senza pagamento (mentre aspetti Stripe)</button>
-          <button class="btn ghost full" type="button" onclick="loginConsole()">Ho gia il pack, entra</button>
+        <div class="pro-copy">
+          <p class="kicker">LAUNCH PACK · 7,99 €</p>
+          <h2>Il 19 novembre<br>non partire a caso.</h2>
+          <p class="lead">Gli altri aspettano il download. Tu hai piano, sala e mappa. Il gioco lo hanno tutti. Il primo giro no.</p>
+          <ul class="perks">
+            <li><strong>12 novembre</strong> — dossier preload.</li>
+            <li><strong>19 novembre</strong> — piano delle prime 72 ore.</li>
+            <li><strong>Sala</strong> — solo pack.</li>
+            <li><strong>Pin</strong> — col tuo nome sulla mappa.</li>
+          </ul>
+          <div class="price"><strong>7,99 €</strong><span>una tantum</span></div>
+        </div>
+        <div class="pin-form">
+          <h4>Attiva la console</h4>
+          <label class="hint">Nome sui pin e in sala</label>
+          <input id="loginName" placeholder="Enrico" />
+          <label class="hint">Codice per rientrare (min 4)</label>
+          <input id="loginCode" placeholder="VC72EN" />
+          <button class="btn primary full" type="button" onclick="payWithStripe()">Paga 7,99 €</button>
+          <button class="btn ghost full" type="button" onclick="activatePack()">Attiva ora (Stripe in attesa)</button>
+          <button class="btn ghost full" type="button" onclick="loginConsole()">Ho gia il pack</button>
         </div>
       </div>
     </section>
