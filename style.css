@@ -56,8 +56,9 @@ h1, h2 { font-family: "Bebas Neue", sans-serif; letter-spacing: .04em; line-heig
 h1 { font-size: clamp(42px, 8vw, 84px); }
 h2 { font-size: clamp(32px, 5vw, 56px); }
 .lead { max-width: 560px; color: var(--muted); margin: 16px 0 28px; font-size: 17px; }
-
-.countdown { display: flex; gap: 10px; margin-bottom: 24px; }
+h1, .lead {
+  text-shadow: 0 2px 18px rgba(0,0,0,.75);
+}.countdown { display: flex; gap: 10px; margin-bottom: 24px; }
 .countdown div {
   min-width: 78px; padding: 14px 10px; text-align: center;
   background: var(--card); border: 1px solid var(--line); border-radius: 14px;
