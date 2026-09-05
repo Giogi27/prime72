@@ -1,17 +1,17 @@
 const VAULT = [
   { title: "Protocollo operatore", when: "2026-01-01", body: "Nome visibile, codice pack, pin firmati." },
-  { title: "Guida preload", when: "2026-11-12", body: "Ordine download e installazione. Si apre il 12 novembre." },
-  { title: "Guida prima notte", when: "2026-11-19", body: "Cosa fare ora 0-8 senza perdere tempo." },
-  { title: "Guida completamento day-1", when: "2026-11-19", body: "Percorso missioni e giri utili del primo giorno." },
-  { title: "Guida mezzi e soldi onesti", when: "2026-11-19", body: "Cosa prendere la prima notte, senza trainer." },
-  { title: "Guida easter e mappe", when: "2026-11-19", body: "Cosa segnare e come spostarsi." }
+  { title: "Guida preload", when: "2026-11-12", body: "Ordine download e installazione." },
+  { title: "Guida prima notte", when: "2026-11-19", body: "Cosa fare ora 0-8." },
+  { title: "Guida day-1", when: "2026-11-19", body: "Percorso del primo giorno." },
+  { title: "Archivio comandi", when: "2026-11-19", body: "Il 19 novembre qui cataloghiamo i comandi di gioco se usciranno. Niente trainer, niente soldi infiniti." },
+  { title: "Guide mappa", when: "2026-11-19", body: "Cosa segnare e come spostarsi." }
 ];
 const BRIEFS = [
-  "Oggi: identita e codice. Un pin solo se verificabile.",
-  "Oggi: le guide si aprono il 12 e il 19. Non prima.",
-  "Oggi: invita qualcuno in sala, non sotto un Reel.",
+  "Oggi: identita e codice.",
+  "Oggi: le guide e l archivio comandi si aprono il 12 e il 19.",
+  "Oggi: invita qualcuno in sala.",
   "Oggi: email alert vera.",
-  "Oggi: checklist. Il vault si apre da solo."
+  "Oggi: checklist."
 ];
 function vaultOpen(item) {
   return new Date() >= new Date(item.when + "T00:00:00-05:00");
