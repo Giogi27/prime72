@@ -47,24 +47,32 @@
   box-shadow: 0 0 16px rgba(255,45,149,.65);
 }
 #view-feed {
-  max-width: 920px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 28px 22px 80px;
 }
 .race-hero h2 {
   font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(42px, 7vw, 72px);
+  font-size: clamp(42px, 7vw, 64px);
   line-height: .9;
   margin: 8px 0 12px;
 }
-.race-pos { color: #3df0ff; margin: 10px 0 16px; }
-.race-rules {
-  list-style: none;
+.race-pos { color: #3df0ff; margin: 10px 0 8px; }
+.race-grid {
   display: grid;
-  gap: 8px;
-  margin: 22px 0 28px;
-  color: #b9a8c9;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 16px;
+  align-items: start;
 }
+.race-aside { display: grid; gap: 12px; }
+.race-ol, .race-rules {
+  margin: 8px 0 12px;
+  padding-left: 18px;
+  color: #b9a8c9;
+  display: grid;
+  gap: 6px;
+}
+.race-rules { list-style: none; padding-left: 0; }
 .race-board { display: grid; gap: 8px; }
 .race-row {
   display: grid;
@@ -77,9 +85,12 @@
   background: rgba(10,6,18,.72);
   backdrop-filter: blur(12px);
 }
-.race-row.top { border-color: rgba(255,45,149,.4); box-shadow: 0 0 24px rgba(255,45,149,.12); }
+.race-row.top { border-color: rgba(255,45,149,.4); }
 .race-row b {
   font-family: "Bebas Neue", sans-serif;
   font-size: 24px;
   color: #3df0ff;
+}
+@media (max-width: 800px) {
+  .race-grid { grid-template-columns: 1fr; }
 }
