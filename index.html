@@ -96,7 +96,7 @@
             <ol class="race-ol">
               <li data-i18n="race1">Attiva l’abbonamento mensile.</li>
               <li data-i18n="race2">Metti il tuo nome in Profilo.</li>
-              <li data-i18n="race3">Apri Mappa, tocca un punto, dai un nome, Invia.</li>
+              <li data-i18n="race3">Apri Mapa, tocca un punto, dai un nome, Invia.</li>
               <li data-i18n="race4">Se il pin è reale entra in classifica.</li>
             </ol>
             <button class="btn primary full" type="button" onclick="show('map')" data-i18n="raceDrop">Piazza un pin</button>
@@ -154,7 +154,8 @@
           </div>
           <div class="dash-actions">
             <div class="dash-status"><b>LIVE</b></div>
-            <button class="btn ghost" type="button" onclick="logoutConsole()">Exit</button>
+            <button class="btn ghost" type="button" onclick="cancelSubscription()">Disdici</button>
+            <button class="btn ghost" type="button" onclick="logoutConsole()">Esci</button>
           </div>
         </header>
         <div class="brief" id="dailyBrief"></div>
@@ -172,9 +173,10 @@
             </article>
             <article class="hud"><div id="myPins"></div></article>
             <article class="hud">
-              <input id="dashEmail" placeholder="email" />
-              <button class="btn primary full" type="button" onclick="saveAlertFromDash()">OK</button>
-              <p class="hint" id="reentryHint"></p>
+              <p class="hint">Email usata su Stripe</p>
+              <input id="dashEmail" placeholder="email@..." />
+              <button class="btn ghost full" type="button" onclick="cancelSubscription()">Disdici abbonamento</button>
+              <p class="hint" id="reentryHint">Si apre Stripe. Lì interrompi il rinnovo.</p>
             </article>
           </div>
         </div>
