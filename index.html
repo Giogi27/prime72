@@ -211,13 +211,38 @@
       </div>
     </section>
     <section id="view-admin" class="view">
-      <div class="panel-head"><h2>Admin</h2></div>
-      <input id="adminSecret" type="password" placeholder="password admin" />
-      <button class="btn primary" type="button" onclick="loadPending()">Carica pin e messaggi</button>
-      <div id="adminMap"></div>
-      <div id="adminList"></div>
-      <h3 style="margin:18px 0 8px">Messaggi Contattaci</h3>
-      <div id="adminInbox"></div>
+      <div class="ops-wrap">
+        <header class="ops-head">
+          <div>
+            <p class="kicker">BASE OPERATIVA</p>
+            <h2>Command</h2>
+            <p class="hint">Pin, inbox, sala. Solo tu.</p>
+          </div>
+          <div class="ops-lock">
+            <input id="adminSecret" type="password" placeholder="password admin" />
+            <button class="btn primary" type="button" onclick="bootOps()">Apri command</button>
+          </div>
+        </header>
+        <div class="ops-kpis">
+          <div><b id="kpiPend">–</b><i>in coda</i></div>
+          <div><b id="kpiLive">–</b><i>live</i></div>
+          <div><b id="kpiMsg">–</b><i>messaggi</i></div>
+          <div><b id="kpiSala">–</b><i>sala</i></div>
+        </div>
+        <div class="ops-tabs">
+          <button type="button" class="on" data-ops="coda" onclick="opsTab('coda')">Coda pin</button>
+          <button type="button" data-ops="live" onclick="opsTab('live')">Pin live</button>
+          <button type="button" data-ops="inbox" onclick="opsTab('inbox')">Inbox</button>
+          <button type="button" data-ops="sala" onclick="opsTab('sala')">Sala</button>
+        </div>
+        <div id="ops-coda" class="ops-pane on">
+          <div id="adminMap"></div>
+          <div id="adminList"></div>
+        </div>
+        <div id="ops-live" class="ops-pane"><div id="opsLiveList"></div></div>
+        <div id="ops-inbox" class="ops-pane"><div id="adminInbox"></div></div>
+        <div id="ops-sala" class="ops-pane"><div id="opsSala"></div></div>
+      </div>
     </section>
   </main>
   <footer><p data-i18n="footer">Prototipo indipendente.</p></footer>
@@ -231,6 +256,7 @@
   <script src="vault.js"></script>
   <script src="sala.js"></script>
   <script src="inbox.js"></script>
+  <script src="ops.js"></script>
   <script src="race.js"></script>
   <script src="stripe-buy.js"></script>
 </body>
