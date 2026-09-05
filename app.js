@@ -22,23 +22,34 @@ function tickCountdown() {
 setInterval(tickCountdown, 1000);
 tickCountdown();
 
-function show(name) {
+function currentView() {
+  const h = (location.hash || "#home").replace("#", "").trim();
+  const ok = ["home", "map", "feed", "quiz", "pro", "admin"];
+  return ok.indexOf(h) >= 0 ? h : "home";
+}
+
+function show(name, skipHash) {
   document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
   const view = document.getElementById("view-" + name);
   if (view) view.classList.add("active");
   document.querySelectorAll(".nav button").forEach((b) => {
     b.classList.toggle("active", b.dataset.view === name);
   });
+  if (!skipHash) {
+    const next = "#" + name;
+    if (location.hash !== next) location.hash = name;
+  }
   if (name === "map") setTimeout(initMap, 60);
   if (name === "admin") setTimeout(ensureAdminMap, 80);
 }
+
 document.querySelectorAll(".nav button").forEach((b) => {
   b.addEventListener("click", () => show(b.dataset.view));
 });
 window.addEventListener("hashchange", function () {
-  if (location.hash === "#admin") show("admin");
+  show(currentView(), true);
 });
-if (location.hash === "#admin") show("admin");
+show(currentView(), true);
 
 function toast(msg) {
   const t = document.getElementById("toast");
@@ -138,13 +149,6 @@ async function addPin() {
   pendingLatLng = null;
 }
 
-const seedFeed = [
-  { t: "seed", votes: 184, text: "Preload PS5 Store visibile in alcune regioni EU — da confermare IT." },
-  { t: "seed", votes: 251, text: "Nel Extended Look la targa Bentine / Leonida è ricorrente." },
-  { t: "seed", votes: 410, text: "Mappa: il porto container è a sud-est del core Vice City." },
-  { t: "seed", votes: 33, text: "Rockstar conferma ancora il 19 novembre. Nessun slip ufficiale." }
-];
-
 async function renderFeed() {
   const box = document.getElementById("feed");
   if (!box) return;
@@ -156,15 +160,14 @@ async function renderFeed() {
   } catch (e) {
     rows = [];
   }
-  const fromCloud = rows.map(function (r) {
-    return { votes: r.votes || 1, text: r.body || r.text, t: "cloud" };
-  });
-  const all = fromCloud.concat(seedFeed);
-  box.innerHTML = all.map(function (r) {
+  if (!rows.length) {
+    box.innerHTML = "<p class='hint'>Nessuna scoperta ancora. Pubblica la prima.</p>";
+    return;
+  }
+  box.innerHTML = rows.map(function (r) {
     return '<article class="item"><div class="meta"><span class="votes">▲ ' +
-      (r.votes || 1) + "</span> " +
-      (r.t === "cloud" ? "community" : "esempio") +
-      "</div><p>" + r.text + "</p></article>";
+      (r.votes || 1) + "</span> community</div><p>" +
+      (r.body || r.text) + "</p></article>";
   }).join("");
 }
 
@@ -298,6 +301,4 @@ async function modPin(id, ok) {
   if (error) return toast(error.message);
   toast(ok ? "Approvato" : "Eliminato");
   loadPending();
-} 
-  
-
+}
