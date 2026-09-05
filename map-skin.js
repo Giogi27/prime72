@@ -1,7 +1,8 @@
-const ZONE = L.latLngBounds([25.72, -80.30], [25.85, -80.12]);
+const ZONE = L.latLngBounds([25.62, -80.42], [26.02, -80.08]);
 
 function restyleMap(target) {
-  if (!target) return;
+  if (!target || target._skinned) return;
+  target._skinned = true;
   target.eachLayer(function (layer) {
     if (layer instanceof L.TileLayer) target.removeLayer(layer);
   });
@@ -9,10 +10,9 @@ function restyleMap(target) {
     attribution: "Esri",
     maxZoom: 18
   }).addTo(target);
-  target.setMinZoom(12);
-  target.setMaxZoom(16);
-  target.setMaxBounds(ZONE.pad(0.05));
-  target.fitBounds(ZONE);
+  target.setMinZoom(10);
+  target.setMaxZoom(17);
+  target.setMaxBounds(ZONE.pad(0.15));
 }
 
 window.addTiles = function (target) {
