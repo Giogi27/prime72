@@ -1,0 +1,9 @@
+{
+  "name": "PRIME 72 — GTA 6 Command",
+  "short_name": "PRIME 72",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0a0612",
+  "theme_color": "#0a0612",
+  "lang": "it"
+}

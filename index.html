@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>PRIME 72 — Centro operativo GTA 6</title>
+  <meta name="description" content="Mappa collaborativa, feed scoperte e meta economia per le prime 72 ore di GTA 6. Lancio 19 novembre 2026." />
+  <meta name="theme-color" content="#0a0612" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <header class="top">
+    <div class="brand" onclick="show('home')">
+      <span class="logo-mark">72</span>
+      <div>
+        <strong>PRIME 72</strong>
+        <small>LEONIDA COMMAND</small>
+      </div>
+    </div>
+    <nav class="nav">
+      <button data-view="home">Home</button>
+      <button data-view="map">Mappa</button>
+      <button data-view="feed">Feed</button>
+      <button data-view="quiz">Profilo</button>
+      <button data-view="pro" class="pro-btn">Pro</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section id="view-home" class="view active">
+      <div class="hero">
+        <p class="kicker">GTA VI · 19 novembre 2026</p>
+        <h1>Le prime 72 ore<br>si vincono prima del lancio.</h1>
+        <p class="lead">Mappa collaborativa di Leonida, ticker scoperte in tempo reale e meta economia. Non un altro sito leak — il centro operativo del drop.</p>
+        <div class="countdown" id="countdown">
+          <div><b id="d">--</b><span>giorni</span></div>
+          <div><b id="h">--</b><span>ore</span></div>
+          <div><b id="m">--</b><span>min</span></div>
+          <div><b id="s">--</b><span>sec</span></div>
+        </div>
+        <div class="cta-row">
+          <button class="btn primary" onclick="show('map')">Apri la mappa</button>
+          <button class="btn ghost" onclick="show('quiz')">Che criminale sei?</button>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div><b>19.11.26</b><span>Lock date Rockstar</span></div>
+        <div><b>12.11.26</b><span>Inizio preload</span></div>
+        <div><b>72h</b><span>Finestra che conta</span></div>
+        <div><b>IT + EN</b><span>Community hub</span></div>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <span class="tag">PRE</span>
+          <h3>Mappa collettiva</h3>
+          <p>Pin da trailer, Extended Look e avvistamenti. Leonida si ricostruisce prima che il disco parta.</p>
+        </article>
+        <article class="card">
+          <span class="tag live">LIVE</span>
+          <h3>Ticker scoperte</h3>
+          <p>Primo che trova X, server status, prezzi reali delle prime proprietà. Tipo Bloomberg, ma Vice City.</p>
+        </article>
+        <article class="card">
+          <span class="tag">POST</span>
+          <h3>Meta economia</h3>
+          <p>Tracker soldi, matching crew, alert quando la meta cambia nelle prime due settimane.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section id="view-map" class="view">
+      <div class="panel-head">
+        <h2>Mappa Leonida</h2>
+        <p>Pin della community · prototipo con location dall’Extended Look</p>
+      </div>
+      <div class="map-wrap">
+        <div id="map"></div>
+        <aside class="pin-form">
+          <h4>Aggiungi un pin</h4>
+          <input id="pinTitle" placeholder="Nome location" />
+          <select id="pinType">
+            <option>Locale</option>
+            <option>Spiaggia</option>
+            <option>Quartiere</option>
+            <option>Missione</option>
+            <option>Easter egg</option>
+          </select>
+          <textarea id="pinNote" rows="3" placeholder="Cosa hai riconosciuto e da quale trailer"></textarea>
+          <button class="btn primary full" onclick="addPin()">Pubblica pin</button>
+          <p class="hint">Clicca sulla mappa per scegliere il punto, poi pubblica. In produzione i pin vanno su database condiviso.</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FEED -->
+    <section id="view-feed" class="view">
+      <div class="panel-head">
+        <h2>Feed scoperte</h2>
+        <p>Simulazione live · al lancio qui arrivano report reali della community</p>
+      </div>
+      <div class="ticker" id="ticker"></div>
+      <div class="feed" id="feed"></div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="view-quiz" class="view">
+      <div class="panel-head">
+        <h2>Profilo criminale</h2>
+        <p>4 domande. Il risultato guida il tuo piano per le prime 72 ore.</p>
+      </div>
+      <div class="quiz" id="quizBox"></div>
+    </section>
+
+    <!-- PRO -->
+    <section id="view-pro" class="view">
+      <div class="pro-hero">
+        <p class="kicker">PRIME 72 PRO</p>
+        <h2>Priorità nelle 72 ore che contano.</h2>
+        <p>Alert server, mappa HD, meta economia e matching crew. Paghi una volta per il lancio.</p>
+        <div class="price">
+          <strong>7,99 €</strong>
+          <span>una tantum · Launch Pack</span>
+        </div>
+        <ul class="perks">
+          <li>Notifiche prioritarie preload / server / hotfix</li>
+          <li>Mappa HD + layer missioni confermate</li>
+          <li>Tracker prezzi proprietà e veicoli giorno 1–14</li>
+          <li>Crew finder Italia + EU</li>
+        </ul>
+        <button class="btn primary" onclick="fakeCheckout()">Sblocca Pro (demo)</button>
+        <p class="hint">Questa è la UI. Stripe si collega in deploy (chiave tua).</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>PRIME 72 è un prototipo indipendente. Non affiliato a Rockstar Games / Take-Two. GTA e Vice City sono marchi dei rispettivi proprietari.</p>
+  </footer>
+
+  <div id="toast" hidden></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
