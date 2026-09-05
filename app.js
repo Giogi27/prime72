@@ -2,8 +2,9 @@ const LAUNCH = new Date("2026-11-19T00:00:00-05:00");
 const STORE_PINS = "p72_pins";
 const STORE_FEED = "p72_feed";
 const STORE_ALERT = "p72_alert";
-
-function tickCountdown() {
+const SB_URL = "https://soskkfqeudtqfarzjlal.supabase.co";
+const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvc2trZnFldWR0cWZhcnpqbGFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1ODg5NzIsImV4cCI6MjEwNDE2NDk3Mn0.zxvsRI0_PHU5-xCvpgJlWySnBbCemxbPuI6Zpx7HQLw";
+const sb = window.supabase.createClient(SB_URL, SB_KEY);function tickCountdown() {
   const now = new Date();
   let diff = Math.max(0, LAUNCH - now);
   const d = Math.floor(diff / 86400000);
