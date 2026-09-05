@@ -1,17 +1,17 @@
 const VAULT = [
-  { title: "Protocollo operatore", when: "2026-01-01", body: "Nome visibile, codice pack solo tuo, pin firmati, zero leak." },
-  { title: "Dossier preload", when: "2026-11-12", body: "Qui entra store / download / ordine installazione il 12 novembre." },
-  { title: "Dossier drop 72h", when: "2026-11-19", body: "Piano ora 0-72: tetto, mezzo, primo income." },
-  { title: "Rotte day-1", when: "2026-11-19", body: "3 giri ripetibili dopo il disco." },
-  { title: "Priorita veicoli", when: "2026-11-19", body: "Cosa prendere la prima notte." },
-  { title: "Easter + crew", when: "2026-11-19", body: "Protocollo uova e regole crew." }
+  { title: "Protocollo operatore", when: "2026-01-01", body: "Nome visibile, codice pack, pin firmati." },
+  { title: "Guida preload", when: "2026-11-12", body: "Ordine download e installazione. Si apre il 12 novembre." },
+  { title: "Guida prima notte", when: "2026-11-19", body: "Cosa fare ora 0-8 senza perdere tempo." },
+  { title: "Guida completamento day-1", when: "2026-11-19", body: "Percorso missioni e giri utili del primo giorno." },
+  { title: "Guida mezzi e soldi onesti", when: "2026-11-19", body: "Cosa prendere la prima notte, senza trainer." },
+  { title: "Guida easter e mappe", when: "2026-11-19", body: "Cosa segnare e come spostarsi." }
 ];
 const BRIEFS = [
-  "Oggi: salva identita e codice. Un pin solo se e verificabile.",
-  "Oggi: niente teoria da forum. Segna solo cio che hai visto tu.",
-  "Oggi: invita un amico a mettere un pin, non un leak.",
-  "Oggi: controlla che l email alert sia vera.",
-  "Oggi: ripassa la checklist. Il vault si apre da solo."
+  "Oggi: identita e codice. Un pin solo se verificabile.",
+  "Oggi: le guide si aprono il 12 e il 19. Non prima.",
+  "Oggi: invita qualcuno in sala, non sotto un Reel.",
+  "Oggi: email alert vera.",
+  "Oggi: checklist. Il vault si apre da solo."
 ];
 function vaultOpen(item) {
   return new Date() >= new Date(item.when + "T00:00:00-05:00");
@@ -25,8 +25,8 @@ function renderVault() {
     if (open) openN++;
     const date = v.when.slice(8, 10) + "." + v.when.slice(5, 7);
     return '<article class="crate' + (open ? " open" : "") + '"><span class="seal">' +
-      (open ? "APERTO" : "SIGILLO " + date) + "</span><h4>" + v.title + "</h4><p class=\"hint\">" +
-      (open ? v.body : "Sigillato. Si apre il " + date + ".") + "</p></article>";
+      (open ? "APERTA" : "SI APRE " + date) + "</span><h4>" + v.title + "</h4><p class=\"hint\">" +
+      (open ? v.body : "Chiusa fino al " + date + ".") + "</p></article>";
   }).join("");
   const kpi = document.getElementById("kpiVault");
   if (kpi) kpi.textContent = openN + "/" + VAULT.length;
