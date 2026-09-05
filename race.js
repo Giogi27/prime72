@@ -14,7 +14,7 @@ async function renderRace() {
     return { name: name, pins: counts[name] };
   }).sort(function (a, b) { return b.pins - a.pins; });
   if (!rows.length) {
-    box.innerHTML = "<p class='hint'>La griglia è vuota. I primi pin validi aprono la corsa.</p>";
+    box.innerHTML = "<p class='hint'>" + (typeof t === "function" ? t("raceEmpty") : "") + "</p>";
   } else {
     box.innerHTML = rows.map(function (r, i) {
       return '<article class="race-row' + (i < 3 ? " top" : "") + '">' +
@@ -25,11 +25,11 @@ async function renderRace() {
   const mine = (op.name || "").trim();
   const idx = rows.findIndex(function (r) { return r.name === mine; });
   const inPack = typeof hasPack === "function" && hasPack();
-  if (you) {
-    if (!inPack) you.textContent = "Classifica pubblica. Per scalare serve il Launch Pack.";
-    else if (!mine) you.textContent = "Pack attivo. Salva il nome in Profilo per entrare in griglia.";
-    else if (idx < 0) you.textContent = mine + " è in gara. In attesa del primo pin validato.";
-    else you.textContent = mine + " · posizione #" + (idx + 1) + " · " + rows[idx].pins + " pin validati";
+  if (you && typeof t === "function") {
+    if (!inPack) you.textContent = t("raceWatch");
+    else if (!mine) you.textContent = t("raceNeedName");
+    else if (idx < 0) you.textContent = mine + t("raceWait");
+    else you.textContent = mine + t("racePos") + (idx + 1) + " · " + rows[idx].pins + " pin";
   }
   if (cta) cta.hidden = !!inPack;
 }
