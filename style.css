@@ -18,11 +18,10 @@ html, body { background: var(--bg); color: var(--text); font-family: Outfit, sys
 body {
   background-color: #0a0612;
   background-image:
-    linear-gradient(180deg, rgba(80,10,70,.45) 0%, rgba(10,6,18,.72) 55%, rgba(10,6,18,.94) 100%),
-    linear-gradient(90deg, rgba(0,180,200,.18), rgba(255,40,140,.22)),
-    url("https://images.unsplash.com/photo-1514214246283-d42768186965?auto=format&fit=crop&w=1920&q=80");
+    linear-gradient(180deg, rgba(10,6,18,.28) 0%, rgba(10,6,18,.55) 100%),
+    url("https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1920&q=80");
   background-size: cover;
-  background-position: center 60%;
+  background-position: center 35%;
   background-attachment: fixed;
 }.top {
   position: sticky; top: 0; z-index: 20;
