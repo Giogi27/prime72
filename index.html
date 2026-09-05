@@ -22,7 +22,7 @@
     <nav class="nav">
       <button data-view="home">Home</button>
       <button data-view="map">Mappa</button>
-      <button data-view="feed">Feed</button>
+      <button data-view="feed">Gara</button>
       <button data-view="quiz">Profilo</button>
       <button data-view="dash" id="navDash" hidden>Console</button>
       <button data-view="pro" class="pro-btn">Pro</button>
@@ -47,7 +47,7 @@
         <div class="tease">
           <article><b>12 NOV</b><span>Guida preload</span></article>
           <article><b>19 NOV</b><span>Guide + cheat di gioco</span></article>
-          <article><b>PACK</b><span>Sala + pin col tuo nome</span></article>
+          <article><b>GARA</b><span>Pin approvati · solo pack</span></article>
         </div>
       </div>
     </section>
@@ -75,13 +75,14 @@
       </div>
     </section>
     <section id="view-feed" class="view">
-      <div class="panel-head"><h2>Feed</h2></div>
-      <div class="pin-form" style="max-width:560px;margin-bottom:14px">
-        <textarea id="discText" rows="3" placeholder="Scoperta..."></textarea>
-        <button class="btn primary" type="button" onclick="addDiscovery()">Pubblica</button>
+      <div class="panel-head">
+        <h2>Gara pin</h2>
+        <p>Si vede tutti. Si scala solo col pack. Contano i pin che io approvo.</p>
       </div>
-      <div class="ticker" id="ticker"></div>
-      <div class="feed" id="feed"></div>
+      <p class="hint" id="raceYou"></p>
+      <div class="price" style="margin:12px 0 18px"><strong>1° del mese</strong><span>premio a scelta tua (gift card)</span></div>
+      <div id="raceBoard" class="race-board"></div>
+      <p class="hint">Niente chat. Niente testo libero. Solo scoperta sulla mappa.</p>
     </section>
     <section id="view-quiz" class="view">
       <div class="panel-head"><h2>Operatore</h2></div>
@@ -150,13 +151,13 @@
         <div class="pro-copy">
           <p class="kicker">LAUNCH PACK · 7,99 €</p>
           <h2>Il 19 novembre<br>non partire a caso.</h2>
-          <p class="lead">Guide, sala, pin e cheat di gioco. Si aprono alle date, non prima.</p>
+          <p class="lead">Guide, sala, pin, gara e cheat di gioco.</p>
           <ul class="perks">
+            <li><strong>Gara pin</strong> — classifica mensile, solo pack.</li>
             <li><strong>Guide di completamento</strong> — 12 e 19 novembre.</li>
             <li><strong>Cheat di gioco</strong> — si aprono il 19 novembre.</li>
             <li><strong>Prima notte</strong> — cosa fare nelle prime 8 ore.</li>
-            <li><strong>Sala pack</strong></li>
-            <li><strong>Pin col tuo nome</strong></li>
+            <li><strong>Sala pack + pin col tuo nome</strong></li>
           </ul>
           <div class="price"><strong>7,99 €</strong><span>una tantum</span></div>
         </div>
@@ -189,6 +190,7 @@
   <script src="map-skin.js"></script>
   <script src="vault.js"></script>
   <script src="sala.js"></script>
+  <script src="race.js"></script>
   <script src="stripe-buy.js"></script>
 </body>
 </html>
