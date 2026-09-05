@@ -140,20 +140,17 @@
         <p class="kicker">LAUNCH PACK · 7,99 €</p>
         <h2>Non compri un PDF. Compri i sigilli.</h2>
         <ul class="perks">
-          <li><strong>Vault Pro a tempo</strong></li>
-          <li><strong>Sala pack</strong> — bacheca chiusa, solo chi ha attivato.</li>
-          <li><strong>Pin firmati + alert</strong></li>
+          <li><strong>Vault + sala + pin firmati</strong></li>
         </ul>
-        <div class="price"><strong>7,99 €</strong><span>una tantum · demo</span></div>
+        <div class="price"><strong>7,99 €</strong><span>pagamento Stripe · una tantum</span></div>
         <div class="pin-form" style="margin:18px 0">
-          <h4>Attiva o rientra</h4>
+          <h4>Paga e attiva</h4>
           <input id="loginName" placeholder="Nome operatore" />
-          <input id="loginCode" placeholder="Codice pack" />
-          <button class="btn primary full" type="button" onclick="activatePack()">Attiva pack (demo)</button>
-          <button class="btn ghost full" type="button" onclick="loginConsole()">Entra in console</button>
+          <input id="loginCode" placeholder="Codice pack che vuoi usare dopo" />
+          <button class="btn primary full" type="button" onclick="payWithStripe()">Paga 7,99 €</button>
+          <button class="btn ghost full" type="button" onclick="loginConsole()">Ho gia pagato, entra</button>
+          <p class="hint">Prima nome + codice, poi Stripe. Dopo il pagamento torni qui e la console si apre.</p>
         </div>
-        <input id="alertEmail" placeholder="email alert lancio" />
-        <button class="btn ghost" type="button" onclick="saveAlert()">Salva solo l email</button>
       </div>
     </section>
     <section id="view-admin" class="view">
@@ -171,5 +168,6 @@
   <script src="app.js"></script>
   <script src="vault.js"></script>
   <script src="sala.js"></script>
+  <script src="stripe-buy.js"></script>
 </body>
 </html>
