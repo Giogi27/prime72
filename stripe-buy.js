@@ -12,7 +12,27 @@ async function payWithStripe() {
     if (!res.ok || !data.url) throw new Error(data.error || "Checkout non creato");
     location.href = data.url;
   } catch (e) {
-    toast(e.message || "Stripe non configurato. Usa ancora Attiva pack (demo).");
+    toast(e.message || "Stripe non configurato.");
+  }
+}
+
+async function cancelSubscription() {
+  const email = ((document.getElementById("dashEmail") || {}).value || "").trim();
+  if (!email.includes("@")) {
+    return toast("Scrivi nel campo email quella usata su Stripe, poi Disdici.");
+  }
+  toast("Apro Stripe...");
+  try {
+    const res = await fetch("/api/billing-portal", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email })
+    });
+    const data = await res.json();
+    if (!res.ok || !data.url) throw new Error(data.error || "Portale non disponibile");
+    location.href = data.url;
+  } catch (e) {
+    toast(e.message || "Attiva il Customer portal in Stripe.");
   }
 }
 
