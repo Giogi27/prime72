@@ -1,6 +1,5 @@
 :root {
   --bg: #0a0612;
-  --bg2: #140c1c;
   --pink: #ff2d95;
   --cyan: #3df0ff;
   --gold: #f5c15a;
@@ -10,11 +9,7 @@
   --line: rgba(255,255,255,.08);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body {
-  color: var(--text);
-  font-family: Outfit, system-ui, sans-serif;
-  min-height: 100vh;
-}
+html, body { color: var(--text); font-family: Outfit, system-ui, sans-serif; min-height: 100vh; }
 html {
   background-color: #0a0612;
   background-image:
@@ -25,9 +20,7 @@ html {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-.noise {
-  pointer-events: none; position: fixed; inset: 0; opacity: .07; z-index: 0;
-}
+.noise { pointer-events: none; position: fixed; inset: 0; opacity: .07; z-index: 0; }
 .top {
   position: sticky; top: 0; z-index: 20;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
@@ -39,7 +32,7 @@ html {
   width: 42px; height: 42px; display: grid; place-items: center;
   font-family: "Bebas Neue", sans-serif; font-size: 22px;
   background: linear-gradient(135deg, var(--pink), #7b2cff);
-  border-radius: 10px; box-shadow: 0 0 24px rgba(255,45,149,.35);
+  border-radius: 10px;
 }
 .brand strong { display: block; letter-spacing: .12em; font-size: 14px; }
 .brand small { color: var(--cyan); letter-spacing: .2em; font-size: 10px; }
@@ -50,12 +43,9 @@ html {
 }
 .nav button:hover, .nav button.active { color: var(--text); border-color: var(--line); background: #1c1226; }
 .pro-btn { color: var(--gold) !important; }
-
 main { position: relative; z-index: 2; max-width: 1120px; margin: 0 auto; padding: 28px 20px 80px; }
-.view { display: none; animation: fade .35s ease; }
+.view { display: none; }
 .view.active { display: block; }
-@keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
-
 .kicker { color: var(--cyan); letter-spacing: .28em; font-size: 12px; text-transform: uppercase; margin-bottom: 10px; }
 h1, h2 { font-family: "Bebas Neue", sans-serif; letter-spacing: .04em; line-height: .95; }
 h1 { font-size: clamp(42px, 8vw, 84px); }
@@ -70,37 +60,28 @@ h1, .lead { text-shadow: 0 2px 18px rgba(0,0,0,.75); }
 .countdown b { display: block; font-size: 28px; font-family: "Bebas Neue", sans-serif; color: var(--pink); }
 .countdown span { font-size: 11px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
 .cta-row { display: flex; gap: 10px; flex-wrap: wrap; }
-.btn {
-  border: 0; cursor: pointer; font: inherit; font-weight: 600;
-  padding: 12px 18px; border-radius: 999px;
-}
+.btn { border: 0; cursor: pointer; font: inherit; font-weight: 600; padding: 12px 18px; border-radius: 999px; }
 .btn.primary { background: linear-gradient(90deg, var(--pink), #ff6b3d); color: #1a0610; }
 .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
 .btn.full { width: 100%; }
-
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
-.card h3 { margin: 10px 0 8px; }
-.card p { color: var(--muted); font-size: 14px; }
 .tag { font-size: 11px; letter-spacing: .14em; color: var(--gold); }
 .tag.live { color: #ff4d4d; }
 .panel-head { margin-bottom: 16px; }
 .panel-head p { color: var(--muted); margin-top: 6px; }
-
 .map-wrap {
   display: grid; grid-template-columns: 1fr 280px; gap: 12px;
   background: rgba(8,4,14,.72); border: 1px solid var(--line);
   border-radius: 20px; padding: 12px;
 }
-#map { height: 520px; border-radius: 14px; border: 1px solid var(--line); }
+#map { height: 520px; border-radius: 14px; }
 .pin-form { background: rgba(18,10,28,.88); border: 1px solid var(--line); border-radius: 18px; padding: 16px; }
-.pin-form h4 { margin-bottom: 12px; }
 .pin-form input, .pin-form select, .pin-form textarea,
 #view-pro input, #view-admin input {
   width: 100%; margin-bottom: 8px; padding: 10px 12px; border-radius: 10px;
   border: 1px solid var(--line); background: #110818; color: var(--text); font: inherit;
 }
 .hint { color: var(--muted); font-size: 12px; margin-top: 10px; }
-
 .ticker {
   overflow: hidden; white-space: nowrap; border: 1px solid var(--line);
   border-radius: 999px; padding: 10px 0; margin-bottom: 16px; background: #160b1e;
@@ -109,21 +90,12 @@ h1, .lead { text-shadow: 0 2px 18px rgba(0,0,0,.75); }
 @keyframes tick { to { transform: translateX(-100%); } }
 .feed { display: flex; flex-direction: column; gap: 10px; }
 .item { background: rgba(18,10,28,.88); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
-.item .meta { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-.votes { color: var(--pink); font-weight: 700; margin-right: 8px; }
-
 .quiz-q { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
-.quiz-q h3 { margin-bottom: 14px; }
 .opts { display: grid; gap: 8px; }
 .opts button { text-align: left; background: #120818; color: var(--text); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; cursor: pointer; font: inherit; }
-.opts button:hover { border-color: var(--pink); }
-.result { background: linear-gradient(180deg, #2a1230, var(--card)); border: 1px solid var(--pink); border-radius: 18px; padding: 24px; }
-
+.result { border: 1px solid var(--pink); border-radius: 18px; padding: 24px; background: var(--card); }
 .pro-hero { max-width: 560px; }
-.price { margin: 18px 0; }
 .price strong { font-size: 48px; font-family: "Bebas Neue", sans-serif; }
-.price span { display: block; color: var(--muted); }
-
 footer {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 15;
   text-align: center; color: #c9bdd4; font-size: 12px;
@@ -134,63 +106,50 @@ footer {
   background: #1e1028; border: 1px solid var(--pink); color: var(--text);
   padding: 12px 18px; border-radius: 999px; z-index: 50;
 }
-
 .p72-pin { background: none !important; border: 0 !important; }
 .p72-pin-inner {
   width: 36px; height: 36px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 20px; background: #140c1c; border: 2px solid #ff2d95;
-  box-shadow: 0 8px 20px rgba(0,0,0,.45);
 }
-
 #view-admin {
-  max-width: 720px; margin: 0 auto;
-  padding: 24px 20px 48px;
-  background: rgba(10,6,18,.78);
-  border: 1px solid var(--line); border-radius: 20px;
+  max-width: 720px; margin: 0 auto; padding: 24px 20px 48px;
+  background: rgba(10,6,18,.78); border: 1px solid var(--line); border-radius: 20px;
 }
-#adminMap { height: 340px; width: 100%; border-radius: 14px; margin: 16px 0; background: #1a1024; }
-
+#adminMap { height: 340px; border-radius: 14px; margin: 16px 0; }
 .op-preview, .dash-avatar {
   width: 64px; height: 64px; border-radius: 50%;
   background: #1a1024; border: 2px solid #ff2d95;
   overflow: hidden; display: flex; align-items: center; justify-content: center;
-  font-family: "Bebas Neue", sans-serif; font-size: 24px; margin: 0;
+  font-family: "Bebas Neue", sans-serif; font-size: 24px;
 }
-.op-preview { margin: 12px 0; width: 88px; height: 88px; font-size: 32px; }
+.op-preview { margin: 12px 0; width: 88px; height: 88px; }
 .op-preview img, .dash-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
 .cockpit {
-  background: linear-gradient(180deg, rgba(12,6,20,.88), rgba(8,4,14,.92));
-  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(8,4,14,.92); border: 1px solid rgba(255,255,255,.12);
   border-radius: 22px; overflow: hidden;
-  box-shadow: 0 24px 80px rgba(0,0,0,.45);
 }
 .cockpit-top {
   display: grid; grid-template-columns: auto 1fr auto auto;
   gap: 16px; align-items: center; padding: 16px 18px;
-  border-bottom: 1px solid var(--line); background: rgba(0,0,0,.22);
+  border-bottom: 1px solid var(--line);
 }
 .cockpit-who h2 { font-size: 40px; line-height: .9; margin: 0; }
-.cockpit-who p { color: var(--muted); margin: 4px 0 0; }
 .cockpit-pips { display: flex; gap: 8px; }
 .cockpit-pips div {
   min-width: 72px; text-align: center; padding: 8px 10px;
-  border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.03);
+  border: 1px solid var(--line); border-radius: 12px;
 }
 .cockpit-pips b { display: block; font-family: "Bebas Neue", sans-serif; font-size: 22px; }
-.cockpit-pips i { font-style: normal; font-size: 10px; color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
-.dash-status b { color: var(--cyan); letter-spacing: .2em; font-size: 12px; display: block; }
+.cockpit-pips i { font-style: normal; font-size: 10px; color: var(--muted); text-transform: uppercase; }
+.dash-status b { color: var(--cyan); letter-spacing: .2em; font-size: 12px; }
 .cockpit-body { display: grid; grid-template-columns: 1.35fr .8fr; gap: 12px; padding: 14px; }
 .cockpit-side { display: grid; gap: 12px; }
 .hud {
   background: rgba(18,10,28,.72); border: 1px solid rgba(255,45,149,.18);
-  border-radius: 16px; padding: 16px 16px 18px; min-height: 160px;
+  border-radius: 16px; padding: 16px; min-height: 160px;
 }
-.hud-main { min-height: 280px; }
-.hud h3 { margin: 6px 0 8px; }
 .play { margin: 10px 0 0 18px; color: #ddd; line-height: 1.55; }
-
 @media (max-width: 860px) {
   .map-wrap, .cockpit-top, .cockpit-body { grid-template-columns: 1fr; }
 }
