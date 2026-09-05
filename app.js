@@ -258,25 +258,27 @@ function saveOperator() {
   localStorage.setItem("p72_name", name);
   localStorage.setItem("p72_crew", crew);
   const file = document.getElementById("opPhoto") && document.getElementById("opPhoto").files[0];
-  if (file && file.size > 700000) {
+  if (!file) {
     saveJSON(STORE_OP, op);
     paintOpPreview();
-    return toast("Nome salvato. Foto troppo pesante (max 700KB).");
+    return toast("Identità salvata: " + (name || "senza nome"));
   }
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function () {
-      op.photo = reader.result;
-      saveJSON(STORE_OP, op);
-      paintOpPreview();
-      toast("Identità salvata: " + (name || "senza nome"));
-    };
-    reader.readAsDataURL(file);
-    return;
-  }
-  saveJSON(STORE_OP, op);
-  paintOpPreview();
-  toast("Identità salvata: " + (name || "senza nome"));
+  const img = new Image();
+  const url = URL.createObjectURL(file);
+  img.onload = function () {
+    const c = document.createElement("canvas");
+    const max = 320;
+    const scale = Math.min(1, max / Math.max(img.width, img.height));
+    c.width = Math.round(img.width * scale);
+    c.height = Math.round(img.height * scale);
+    c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+    op.photo = c.toDataURL("image/jpeg", 0.72);
+    URL.revokeObjectURL(url);
+    saveJSON(STORE_OP, op);
+    paintOpPreview();
+    toast("Identità salvata: " + (name || "senza nome"));
+  };
+  img.src = url;
 }
 
 function paintOpPreview() {
@@ -405,4 +407,4 @@ async function modPin(id, ok) {
   loadPending();
 }
 
-show(currentView(), true);  
+show(currentView(), true);
