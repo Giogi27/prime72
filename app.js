@@ -73,7 +73,10 @@ function saveJSON(key, val) {
 }
 
 function getOp() {
-  return loadJSON(STORE_OP, { name: "", crew: "", photo: "" });
+  const op = loadJSON(STORE_OP, { name: "", crew: "", photo: "" });
+  if (!op.name) op.name = localStorage.getItem("p72_name") || "";
+  if (!op.crew) op.crew = localStorage.getItem("p72_crew") || "";
+  return op;
 }
 
 function refreshNav() {
@@ -150,19 +153,19 @@ async function addPin() {
   const note = document.getElementById("pinNote").value.trim();
   if (!pendingLatLng) return toast("Clicca prima un punto sulla mappa.");
   if (!title) return toast("Dai un nome alla location.");
-  const op = getOp();
+  const who = (getOp().name || localStorage.getItem("p72_name") || "").trim();
   const pin = {
     lat: pendingLatLng.lat,
     lng: pendingLatLng.lng,
     title: title,
     type: type,
     note: note,
-    author: op.name || null
+    author: who || null
   };
   if (!sb) return toast("Database non collegato.");
   const { error } = await sb.from("pins").insert(pin);
   if (error) toast("Errore: " + error.message);
-  else toast("In coda. Se sei Pro il pin uscirà col tuo nome.");
+  else toast(who ? "In coda come " + who : "In coda. Salva un nome in Profilo per firmarlo.");
   document.getElementById("pinTitle").value = "";
   document.getElementById("pinNote").value = "";
   pendingLatLng = null;
@@ -247,35 +250,42 @@ function afterQuiz() {
 renderQuiz();
 
 function saveOperator() {
-  const name = (document.getElementById("opName") || {}).value || "";
-  const crew = (document.getElementById("opCrew") || {}).value || "";
+  const name = ((document.getElementById("opName") || {}).value || "").trim();
+  const crew = ((document.getElementById("opCrew") || {}).value || "").trim();
   const op = getOp();
-  op.name = name.trim();
-  op.crew = crew.trim();
+  op.name = name;
+  op.crew = crew;
+  localStorage.setItem("p72_name", name);
+  localStorage.setItem("p72_crew", crew);
   const file = document.getElementById("opPhoto") && document.getElementById("opPhoto").files[0];
+  if (file && file.size > 700000) {
+    saveJSON(STORE_OP, op);
+    paintOpPreview();
+    return toast("Nome salvato. Foto troppo pesante (max 700KB).");
+  }
   if (file) {
-    if (file.size > 700000) return toast("Foto troppo pesante. Max ~700KB.");
     const reader = new FileReader();
     reader.onload = function () {
       op.photo = reader.result;
       saveJSON(STORE_OP, op);
       paintOpPreview();
-      toast("Identità salvata.");
+      toast("Identità salvata: " + (name || "senza nome"));
     };
     reader.readAsDataURL(file);
     return;
   }
   saveJSON(STORE_OP, op);
   paintOpPreview();
-  toast("Identità salvata.");
+  toast("Identità salvata: " + (name || "senza nome"));
 }
 
 function paintOpPreview() {
   const op = getOp();
   const box = document.getElementById("opPreview");
-  if (!box) return;
-  if (op.photo) box.innerHTML = '<img alt="" src="' + op.photo + '">';
-  else box.textContent = (op.name || "72").slice(0, 2).toUpperCase();
+  if (box) {
+    if (op.photo) box.innerHTML = '<img alt="" src="' + op.photo + '">';
+    else box.textContent = (op.name || "72").slice(0, 2).toUpperCase();
+  }
   const n = document.getElementById("opName");
   const c = document.getElementById("opCrew");
   if (n && !n.value) n.value = op.name;
@@ -299,13 +309,16 @@ function renderDash() {
 
 async function loadMyPins() {
   const box = document.getElementById("myPins");
+  const kpi = document.getElementById("kpiPins");
   if (!box || !sb) return;
   const op = getOp();
   if (!op.name) {
     box.textContent = "Salva un nome in Profilo per firmare i pin.";
+    if (kpi) kpi.textContent = "0";
     return;
   }
   const { data } = await sb.from("pins").select("*").eq("author", op.name).order("created_at", { ascending: false });
+  if (kpi) kpi.textContent = String((data || []).length);
   if (!data || !data.length) {
     box.textContent = "Nessun pin firmato ancora.";
     return;
@@ -375,7 +388,7 @@ async function loadPending() {
       "</p><p>Coord: " + Number(p.lat).toFixed(5) + ", " + Number(p.lng).toFixed(5) + "</p>" +
       '<button class="btn ghost" type="button" onclick="focusPending(' + p.lat + "," + p.lng + ')">Centra</button> ' +
       '<button class="btn primary" type="button" onclick="modPin(\'' + p.id + "', true)\">Approva</button> " +
-      '<button class="btn ghost" type="button" onclick="modPin(\'' + p.id + "', false)\">Elimina</button></article>";
+      '<button class="btn ghost" type="button" onclick="modPin(\'' + p.id + "', false)\">Elimina</button></article>';
   }).join("");
 }
 
