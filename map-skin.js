@@ -1,5 +1,13 @@
 window.lockZone = function () {};
 
+const ANALOG = [
+  { lat: 25.7907, lng: -80.1300, title: "Lungomare", type: "Spiaggia" },
+  { lat: 25.7780, lng: -80.1870, title: "Porto", type: "Quartiere" },
+  { lat: 25.7617, lng: -80.1918, title: "Centro", type: "Quartiere" },
+  { lat: 25.8060, lng: -80.1220, title: "Insegne", type: "Locale" },
+  { lat: 25.7950, lng: -80.2760, title: "Aeroporto", type: "Quartiere" }
+];
+
 function ensureGps() {
   const stage = document.querySelector(".map-stage");
   if (!stage || document.getElementById("gpsHud")) return;
@@ -8,6 +16,20 @@ function ensureGps() {
   el.className = "gps-hud";
   el.textContent = "GPS  --.----   ---.----";
   stage.appendChild(el);
+}
+
+function ensureNight() {
+  const bar = document.querySelector(".radar-bar");
+  if (!bar || document.getElementById("nightBtn")) return;
+  const b = document.createElement("button");
+  b.id = "nightBtn";
+  b.type = "button";
+  b.textContent = "Notte";
+  b.onclick = function () {
+    document.getElementById("map").classList.toggle("night");
+    b.classList.toggle("active");
+  };
+  bar.appendChild(b);
 }
 
 function restyleMap(target) {
@@ -30,6 +52,7 @@ function restyleMap(target) {
     target.setMaxBounds(null);
   }
   ensureGps();
+  ensureNight();
   if (!target._gps) {
     target._gps = true;
     target.on("mousemove", function (e) {
