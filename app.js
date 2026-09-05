@@ -74,7 +74,14 @@ function initMap() {
     attribution: "&copy; OSM &copy; CARTO",
     maxZoom: 19
   }).addTo(map);
-  seedPins.concat(userPins).forEach(placePin);
+    seedPins.concat(userPins).forEach(placePin);
+  sb.from("pins").select("*").then(function (res) {
+    if (res.error) {
+      toast("Pin cloud: " + res.error.message);
+      return;
+    }
+    (res.data || []).forEach(placePin);
+  });
   map.on("click", (e) => {
     pendingLatLng = e.latlng;
     toast("Punto selezionato. Compila e pubblica.");
