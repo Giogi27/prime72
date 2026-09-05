@@ -216,7 +216,7 @@
           <div>
             <p class="kicker">BASE OPERATIVA</p>
             <h2>Command</h2>
-            <p class="hint">Pin, inbox, sala. Solo tu.</p>
+            <p class="hint">Pin, inbox, sala, abbonamenti Stripe.</p>
           </div>
           <div class="ops-lock">
             <input id="adminSecret" type="password" placeholder="password admin" />
@@ -224,16 +224,18 @@
           </div>
         </header>
         <div class="ops-kpis">
-          <div><b id="kpiPend">–</b><i>in coda</i></div>
+          <div><b id="kpiPend">–</b><i>coda</i></div>
           <div><b id="kpiLive">–</b><i>live</i></div>
-          <div><b id="kpiMsg">–</b><i>messaggi</i></div>
+          <div><b id="kpiMsg">–</b><i>inbox</i></div>
           <div><b id="kpiSala">–</b><i>sala</i></div>
+          <div><b id="kpiSub">–</b><i>sub</i></div>
         </div>
         <div class="ops-tabs">
           <button type="button" class="on" data-ops="coda" onclick="opsTab('coda')">Coda pin</button>
           <button type="button" data-ops="live" onclick="opsTab('live')">Pin live</button>
           <button type="button" data-ops="inbox" onclick="opsTab('inbox')">Inbox</button>
           <button type="button" data-ops="sala" onclick="opsTab('sala')">Sala</button>
+          <button type="button" data-ops="subs" onclick="opsTab('subs')">Abbonamenti</button>
         </div>
         <div id="ops-coda" class="ops-pane on">
           <div id="adminMap"></div>
@@ -242,6 +244,7 @@
         <div id="ops-live" class="ops-pane"><div id="opsLiveList"></div></div>
         <div id="ops-inbox" class="ops-pane"><div id="adminInbox"></div></div>
         <div id="ops-sala" class="ops-pane"><div id="opsSala"></div></div>
+        <div id="ops-subs" class="ops-pane"><div id="opsSubs"></div></div>
       </div>
     </section>
   </main>
