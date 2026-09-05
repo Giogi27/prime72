@@ -387,8 +387,8 @@ async function loadPending() {
       "</h3><p>" + (p.type || "") + " · " + (p.author || "anon") + " · " + (p.note || "") +
       "</p><p>Coord: " + Number(p.lat).toFixed(5) + ", " + Number(p.lng).toFixed(5) + "</p>" +
       '<button class="btn ghost" type="button" onclick="focusPending(' + p.lat + "," + p.lng + ')">Centra</button> ' +
-      '<button class="btn primary" type="button" onclick="modPin(\'' + p.id + "', true)\">Approva</button> " +
-      '<button class="btn ghost" type="button" onclick="modPin(\'' + p.id + "', false)\">Elimina</button></article>';
+      '<button class="btn primary" type="button" onclick="modPin(\'' + p.id + '\', true)">Approva</button> ' +
+      '<button class="btn ghost" type="button" onclick="modPin(\'' + p.id + '\', false)">Elimina</button></article>';
   }).join("");
 }
 
@@ -405,4 +405,4 @@ async function modPin(id, ok) {
   loadPending();
 }
 
-show(currentView(), true);
+show(currentView(), true);  
