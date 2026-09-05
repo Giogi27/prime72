@@ -44,11 +44,6 @@
           <button class="btn primary" type="button" onclick="show('map')">Apri la mappa</button>
           <button class="btn ghost" type="button" onclick="goConsoleOrPro()">Entra in console</button>
         </div>
-        <div class="tease">
-          <article><b>12 NOV</b><span>Guida preload</span></article>
-          <article><b>19 NOV</b><span>Guide + cheat di gioco</span></article>
-          <article><b>GARA</b><span>Pin approvati · solo pack</span></article>
-        </div>
       </div>
     </section>
     <section id="view-map" class="view">
@@ -75,14 +70,22 @@
       </div>
     </section>
     <section id="view-feed" class="view">
-      <div class="panel-head">
-        <h2>Gara pin</h2>
-        <p>Si vede tutti. Si scala solo col pack. Contano i pin che io approvo.</p>
+      <div class="race-hero">
+        <p class="kicker">STAGIONE 01 · SETTEMBRE</p>
+        <h2>Chi mappa Leonida<br>porta a casa il mese.</h2>
+        <p class="lead">Gift card PlayStation e codici sconto. Arrivano sulla email del 1°.</p>
+        <p id="raceYou" class="race-pos"></p>
+        <div id="raceCta" class="cta-row">
+          <button class="btn primary" type="button" onclick="show('pro')">Entra in gara · 7,99 €</button>
+          <button class="btn ghost" type="button" onclick="show('map')">Vedi la mappa</button>
+        </div>
+        <ul class="race-rules">
+          <li>Un pin vale quando viene validato.</li>
+          <li>Serve Launch Pack e un nome in Profilo.</li>
+          <li>Fine mese: 1° riceve il premio via email.</li>
+        </ul>
       </div>
-      <p class="hint" id="raceYou"></p>
-      <div class="price" style="margin:12px 0 18px"><strong>1° del mese</strong><span>premio a scelta tua (gift card)</span></div>
       <div id="raceBoard" class="race-board"></div>
-      <p class="hint">Niente chat. Niente testo libero. Solo scoperta sulla mappa.</p>
     </section>
     <section id="view-quiz" class="view">
       <div class="panel-head"><h2>Operatore</h2></div>
@@ -153,7 +156,7 @@
           <h2>Il 19 novembre<br>non partire a caso.</h2>
           <p class="lead">Guide, sala, pin, gara e cheat di gioco.</p>
           <ul class="perks">
-            <li><strong>Gara pin</strong> — classifica mensile, solo pack.</li>
+            <li><strong>Gara pin</strong> — classifica mensile e premio via email.</li>
             <li><strong>Guide di completamento</strong> — 12 e 19 novembre.</li>
             <li><strong>Cheat di gioco</strong> — si aprono il 19 novembre.</li>
             <li><strong>Prima notte</strong> — cosa fare nelle prime 8 ore.</li>
