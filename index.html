@@ -53,7 +53,7 @@
     <section id="view-map" class="view">
       <div class="panel-head">
         <h2>Mappa Leonida</h2>
-        <p>Pin pubblici = approvati. I Pro firmamo i propri pin.</p>
+        <p>Pin pubblici = approvati. I Pro firmano i propri pin.</p>
       </div>
       <div class="map-wrap">
         <div id="map"></div>
@@ -89,7 +89,7 @@
     <section id="view-quiz" class="view">
       <div class="panel-head">
         <h2>Crea operatore</h2>
-        <p>Nome, foto, stile. Poi la console se sei Pro.</p>
+        <p>Nome e foto. Poi la console se hai il pack.</p>
       </div>
       <div class="pin-form" style="max-width:520px">
         <input id="opName" placeholder="Nome in strada" />
@@ -111,16 +111,43 @@
             <h2 id="dashName">Operatore</h2>
             <p id="dashCrew">senza crew</p>
           </div>
+          <div class="dash-status">
+            <b>LIVE</b>
+            <span>Pack attivo · demo</span>
+          </div>
         </div>
-        <div class="grid-3">
-          <article class="card"><span class="tag">H1</span><h3>Notte 1</h3><p>Tetto + mezzo + non morire. Poi esplora.</p></article>
-          <article class="card"><span class="tag">H24</span><h3>Giorno 1</h3><p>Primo income stabile. Segna 3 pin veri.</p></article>
-          <article class="card"><span class="tag">H72</span><h3>Finestra</h3><p>Meta prezzi e crew. Qui vince chi ha già la mappa.</p></article>
+        <div class="dash-kpis">
+          <div><b id="kpiPins">0</b><span>pin firmati</span></div>
+          <div><b>12.11</b><span>preload</span></div>
+          <div><b>19.11</b><span>drop</span></div>
+          <div><b>72h</b><span>finestra</span></div>
         </div>
-        <article class="card">
-          <h3>I tuoi pin in coda / live</h3>
-          <div id="myPins">Nessun pin ancora.</div>
-        </article>
+        <div class="dash-grid">
+          <article class="card">
+            <span class="tag">PLAYBOOK</span>
+            <h3>Le 72 ore</h3>
+            <ol class="play">
+              <li>Preload il 12. Niente update a ridosso del drop.</li>
+              <li>Notte 1: tetto, mezzo, non inseguire ogni icona.</li>
+              <li>Giorno 1: un income ripetibile e 3 pin veri.</li>
+              <li>Ore 24–72: crew e prezzi. Vince chi ha già la mappa.</li>
+            </ol>
+          </article>
+          <article class="card">
+            <span class="tag live">ALERT</span>
+            <h3>Coda lancio</h3>
+            <ul class="play">
+              <li>Store EU — fascia oraria IT da confermare</li>
+              <li>Server status — vuoto finché non aprono</li>
+              <li>Hotfix day-1 — canale Pro</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="tag">IDENTITÀ</span>
+            <h3>I tuoi pin</h3>
+            <div id="myPins">Salva un nome in Profilo, poi piazza un pin.</div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -157,4 +184,3 @@
   <script src="app.js"></script>
 </body>
 </html>
-  
