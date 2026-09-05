@@ -1,14 +1,4 @@
-const ZONE = L.latLngBounds(
-  [25.68, -80.32],
-  [25.95, -80.10]
-);
-
-window.lockZone = function (target) {
-  if (!target) return;
-  target.setMinZoom(11);
-  target.setMaxZoom(16);
-  target.setMaxBounds(ZONE.pad(0.08));
-};
+window.lockZone = function () {};
 
 function restyleMap(target) {
   if (!target || target._skinned) return;
@@ -20,7 +10,9 @@ function restyleMap(target) {
     attribution: "Esri",
     maxZoom: 18
   }).addTo(target);
-  lockZone(target);
+  target.setMinZoom(10);
+  target.setMaxZoom(18);
+  target.setMaxBounds(null);
 }
 
 window.addTiles = function (target) {
@@ -35,10 +27,13 @@ window.addTiles = function (target) {
   window.initMap = function () {
     if (typeof prev === "function") prev();
     if (window.map) {
+      map.setMaxBounds(null);
       restyleMap(map);
-      lockZone(map);
       setTimeout(function () { map.invalidateSize(); }, 120);
     }
   };
-  if (window.map) restyleMap(map);
+  if (window.map) {
+    map.setMaxBounds(null);
+    restyleMap(map);
+  }
 })();
