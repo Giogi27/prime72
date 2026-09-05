@@ -88,17 +88,17 @@ function placePin(p) {
     .bindPopup("<strong>" + p.title + "</strong><br><em>" + p.type + "</em><br>" + (p.note || ""));
 }
 
-function addPin() {
+async function addPin() {
   const title = document.getElementById("pinTitle").value.trim();
   const type = document.getElementById("pinType").value;
   const note = document.getElementById("pinNote").value.trim();
   if (!pendingLatLng) return toast("Clicca prima un punto sulla mappa.");
   if (!title) return toast("Dai un nome alla location.");
-  const pin = { lat: pendingLatLng.lat, lng: pendingLatLng.lng, title, type, note };
+  const pin = { lat: pendingLatLng.lat, lng: pendingLatLng.lng, title: title, type: type, note: note };
   placePin(pin);
-  userPins.push(pin);
-  saveJSON(STORE_PINS, userPins);
-  toast("Pin salvato su questo dispositivo.");
+  const { error } = await sb.from("pins").insert(pin);
+  if (error) toast("Pin locale ok, cloud: " + error.message);
+  else toast("Pin visibile a tutti.");
   document.getElementById("pinTitle").value = "";
   document.getElementById("pinNote").value = "";
   pendingLatLng = null;
@@ -111,29 +111,41 @@ const seedFeed = [
   { t: "seed", votes: 33, text: "Rockstar conferma ancora il 19 novembre. Nessun slip ufficiale." }
 ];
 
-function renderFeed() {
-  const extra = loadJSON(STORE_FEED, []);
-  const all = extra.concat(seedFeed);
+async function renderFeed() {
   const box = document.getElementById("feed");
   if (!box) return;
+  let rows = [];
+  try {
+    const res = await sb.from("discoveries").select("*").order("created_at", { ascending: false }).limit(50);
+    if (res.error) throw res.error;
+    rows = res.data || [];
+  } catch (e) {
+    rows = loadJSON(STORE_FEED, []);
+  }
+  const fromCloud = rows.map(function (r) {
+    return { votes: r.votes || 1, text: r.body || r.text, t: "cloud" };
+  });
+  const all = fromCloud.concat(seedFeed);
   box.innerHTML = all.map(function (r) {
     return '<article class="item"><div class="meta"><span class="votes">▲ ' +
       (r.votes || 1) + "</span> " +
-      (r.t === "seed" ? "community" : "tu · salvato") +
+      (r.t === "cloud" ? "community" : r.t === "seed" ? "esempio" : "tu") +
       "</div><p>" + r.text + "</p></article>";
   }).join("");
 }
 
-function addDiscovery() {
+async function addDiscovery() {
   const input = document.getElementById("discText");
   const text = (input && input.value ? input.value : "").trim();
   if (!text) return toast("Scrivi la scoperta.");
-  const extra = loadJSON(STORE_FEED, []);
-  extra.unshift({ t: "now", votes: 1, text: text });
-  saveJSON(STORE_FEED, extra);
+  const { error } = await sb.from("discoveries").insert({ body: text });
+  if (error) {
+    toast("Errore: " + error.message);
+    return;
+  }
   input.value = "";
+  toast("Pubblicata per tutti.");
   renderFeed();
-  toast("Scoperta pubblicata su questo browser.");
 }
 
 const ticker = document.getElementById("ticker");
