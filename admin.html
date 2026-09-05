@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PRIME 72 — Base operativa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { padding: 24px; background: #0a0612; }
+    .ops { max-width: 1100px; margin: 0 auto; }
+    .ops h1 { font-family: "Bebas Neue", sans-serif; font-size: 48px; }
+    #adminMap { height: 320px; margin: 16px 0; border-radius: 16px; }
+    .row { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+    #adminInbox article, #adminList article { background: #1a1024; padding: 12px; border-radius: 12px; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <div class="ops">
+    <p class="kicker">SOLO TU</p>
+    <h1>Base operativa</h1>
+    <p>Pin in coda e messaggi Contattaci.</p>
+    <div class="row">
+      <input id="adminSecret" type="password" placeholder="password admin" style="min-width:220px" />
+      <button class="btn primary" type="button" onclick="boot()">Entra</button>
+      <a class="btn ghost" href="/">Torna al sito</a>
+    </div>
+    <div id="adminMap"></div>
+    <h2>Pin in attesa</h2>
+    <div id="adminList"></div>
+    <h2>Messaggi</h2>
+    <div id="adminInbox"></div>
+  </div>
+  <div id="toast" hidden></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+  <script src="inbox.js"></script>
+  <script>
+    function boot() {
+      if (typeof loadPending === "function") loadPending();
+      if (typeof loadInbox === "function") loadInbox();
+    }
+  </script>
+</body>
+</html>
