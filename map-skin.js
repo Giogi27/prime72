@@ -5,16 +5,22 @@ function restyleMap(target) {
   target.eachLayer(function (layer) {
     if (layer instanceof L.TileLayer) target.removeLayer(layer);
   });
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-    subdomains: "abcd",
-    attribution: "Carto",
-    maxZoom: 18
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "OSM",
+    maxZoom: 19
   }).addTo(target);
-  target.setMinZoom(11);
+  target.setMinZoom(12);
   target.setMaxZoom(16);
-  target.setMaxBounds(ZONE.pad(0.04));
+  target.setMaxBounds(ZONE.pad(0.06));
   target.fitBounds(ZONE);
 }
+
+window.addTiles = function (target) {
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "OSM",
+    maxZoom: 19
+  }).addTo(target);
+};
 
 (function hookSkin() {
   const prev = window.initMap;
@@ -25,4 +31,5 @@ function restyleMap(target) {
       setTimeout(function () { map.invalidateSize(); }, 80);
     }
   };
+  if (window.map) restyleMap(map);
 })();
