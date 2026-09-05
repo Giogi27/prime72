@@ -139,7 +139,7 @@ async function addPin() {
   placePin(pin);
   const { error } = await sb.from("pins").insert(pin);
   if (error) toast("Pin locale ok, cloud: " + error.message);
-  else toast("Pin visibile a tutti.");
+      else toast("Inviato. Online solo dopo il tuo ok in Admin.");
   document.getElementById("pinTitle").value = "";
   document.getElementById("pinNote").value = "";
   pendingLatLng = null;
