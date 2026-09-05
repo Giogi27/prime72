@@ -3,45 +3,96 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PRIME 72 — Base operativa</title>
+  <title>PRIME 72 Base operativa</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="style.css" />
   <style>
-    body { padding: 24px; background: #0a0612; }
-    .ops { max-width: 1100px; margin: 0 auto; }
-    .ops h1 { font-family: "Bebas Neue", sans-serif; font-size: 48px; }
-    #adminMap { height: 320px; margin: 16px 0; border-radius: 16px; }
-    .row { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
-    #adminInbox article, #adminList article { background: #1a1024; padding: 12px; border-radius: 12px; margin-bottom: 8px; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Outfit, sans-serif; background: #0a0612; color: #f6f0ff; }
+    .ops { max-width: 980px; margin: 0 auto; padding: 28px 18px 80px; }
+    h1 { font-family: "Bebas Neue", sans-serif; font-size: 52px; margin: 0 0 8px; }
+    .kicker { letter-spacing: .16em; color: #3df0ff; font-size: 12px; }
+    input, textarea { width: 100%; max-width: 320px; padding: 10px 12px; border-radius: 10px; border: 0; margin: 6px 6px 6px 0; }
+    button { padding: 10px 14px; border: 0; border-radius: 999px; cursor: pointer; font-weight: 600; }
+    .go { background: #ff2d95; color: #fff; }
+    .ghost { background: transparent; color: #f6f0ff; border: 1px solid #fff3; }
+    #map { height: 300px; border-radius: 16px; margin: 16px 0; }
+    article { background: #1a1024; padding: 14px; border-radius: 14px; margin: 8px 0; }
+    .err { color: #ff8aa8; }
   </style>
 </head>
 <body>
   <div class="ops">
-    <p class="kicker">SOLO TU</p>
+    <p class="kicker">PRIME 72</p>
     <h1>Base operativa</h1>
-    <p>Pin in coda e messaggi Contattaci.</p>
-    <div class="row">
-      <input id="adminSecret" type="password" placeholder="password admin" style="min-width:220px" />
-      <button class="btn primary" type="button" onclick="boot()">Entra</button>
-      <a class="btn ghost" href="/">Torna al sito</a>
-    </div>
-    <div id="adminMap"></div>
+    <p>Password admin, poi Entra.</p>
+    <input id="secret" type="password" placeholder="password admin" />
+    <button class="go" type="button" id="btn">Entra</button>
+    <p id="status"></p>
+    <div id="map"></div>
     <h2>Pin in attesa</h2>
-    <div id="adminList"></div>
+    <div id="pins">—</div>
     <h2>Messaggi</h2>
-    <div id="adminInbox"></div>
+    <div id="msgs">—</div>
   </div>
-  <div id="toast" hidden></div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="app.js"></script>
-  <script src="inbox.js"></script>
   <script>
-    function boot() {
-      if (typeof loadPending === "function") loadPending();
-      if (typeof loadInbox === "function") loadInbox();
+    const sb = window.supabase.createClient(
+      "https://soskkfqeudtqfarzjlal.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvc2trZnFldWR0cWZhcnpqbGFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1ODg5NzIsImV4cCI6MjEwNDE2NDk3Mn0.zxvsRI0_PHU5-xCvpgJlWySnBbCemxbPuI6Zpx7HQLw"
+    );
+    let map;
+    function ensureMap() {
+      if (map) { map.invalidateSize(); return map; }
+      map = L.map("map").setView([25.77, -80.18], 12);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19 }).addTo(map);
+      return map;
     }
+    async function boot() {
+      const secret = document.getElementById("secret").value.trim();
+      const st = document.getElementById("status");
+      if (!secret) { st.textContent = "Scrivi la password."; return; }
+      st.textContent = "Carico...";
+      const pinsBox = document.getElementById("pins");
+      const msgBox = document.getElementById("msgs");
+      const { data, error } = await sb.rpc("list_pending", { secret: secret });
+      if (error) {
+        st.innerHTML = '<span class="err">Password o RPC: ' + error.message + "</span>";
+        pinsBox.textContent = "";
+      } else {
+        st.textContent = "Dentro.";
+        const m = ensureMap();
+        if (!data || !data.length) pinsBox.innerHTML = "<p>Nessun pin in attesa.</p>";
+        else {
+          pinsBox.innerHTML = data.map(function (p) {
+            L.marker([p.lat, p.lng]).addTo(m).bindPopup(p.title || "");
+            return "<article><strong>" + (p.title || "") + "</strong><p>" +
+              (p.type || "") + " · " + (p.author || "anon") + "</p>" +
+              "<button class='go' type='button' onclick=\"mod('" + p.id + "', true)\">Approva</button> " +
+              "<button class='ghost' type='button' onclick=\"mod('" + p.id + "', false)\">Elimina</button></article>";
+          }).join("");
+        }
+      }
+      const inbox = await sb.from("inbox").select("*").order("created_at", { ascending: false }).limit(80);
+      if (inbox.error) {
+        msgBox.innerHTML = "<p class='err'>Tabella inbox: incolla lo SQL in Supabase.</p>";
+      } else if (!inbox.data.length) {
+        msgBox.innerHTML = "<p>Nessun messaggio.</p>";
+      } else {
+        msgBox.innerHTML = inbox.data.map(function (m) {
+          return "<article><strong>" + (m.author || "?") + "</strong> · " +
+            (m.email || "") + "<p>" + (m.body || "") + "</p></article>";
+        }).join("");
+      }
+    }
+    async function mod(id, ok) {
+      const secret = document.getElementById("secret").value.trim();
+      const { error } = await sb.rpc("set_pin_approved", { pid: id, secret: secret, ok: ok });
+      if (error) { document.getElementById("status").textContent = error.message; return; }
+      boot();
+    }
+    document.getElementById("btn").onclick = boot;
   </script>
 </body>
 </html>
