@@ -424,3 +424,10 @@ async function modPin(id, ok) {
   toast(ok ? "Approvato" : "Eliminato");
   loadPending();
 }
+#adminMap {
+  height: 340px;
+  width: 100%;
+  border-radius: 14px;
+  margin: 16px 0;
+  background: #1a1024;
+}
