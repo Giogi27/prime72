@@ -32,7 +32,7 @@
       <div class="hero">
         <p class="kicker">GTA VI · 19 NOVEMBRE 2026</p>
         <h1>Il lancio è per tutti.<br>Le prime 72 ore no.</h1>
-        <p class="lead">Countdown, mappa e vault per il drop di GTA VI. Niente logo ufficiale: solo la data e il piano.</p>
+        <p class="lead">Countdown, mappa e vault per il drop di GTA VI.</p>
         <div class="countdown" id="countdown">
           <div><b id="d">--</b><span>giorni</span></div>
           <div><b id="h">--</b><span>ore</span></div>
@@ -46,12 +46,12 @@
         <div class="tease">
           <article><b>SIGILLO 12.11</b><span>Dossier preload</span></article>
           <article><b>SIGILLO 19.11</b><span>Drop 72 ore</span></article>
-          <article><b>SOLO PRO</b><span>Rotte + easter</span></article>
+          <article><b>SOLO PRO</b><span>Sala + rotte</span></article>
         </div>
       </div>
     </section>
     <section id="view-map" class="view">
-      <div class="panel-head"><h2>Mappa</h2><p>Pin approvati dalla community.</p></div>
+      <div class="panel-head"><h2>Mappa</h2></div>
       <div class="map-wrap">
         <div id="map"></div>
         <aside class="pin-form">
@@ -114,13 +114,19 @@
           </article>
           <div class="cockpit-side">
             <article class="hud">
+              <span class="tag live">SALA PACK</span>
+              <h3>Solo chi ha il pack</h3>
+              <textarea id="salaText" rows="3" placeholder="Messaggio in sala (max 280)"></textarea>
+              <button class="btn primary full" type="button" onclick="addSala()">Pubblica in sala</button>
+              <div id="salaList" class="feed" style="margin-top:10px"></div>
+            </article>
+            <article class="hud">
               <span class="tag">SIGNAL</span>
               <h3>I tuoi pin</h3>
               <div id="myPins">Nessun pin firmato.</div>
             </article>
             <article class="hud">
               <span class="tag">ALERT</span>
-              <h3>Email lancio</h3>
               <input id="dashEmail" placeholder="tua email" />
               <button class="btn primary full" type="button" onclick="saveAlertFromDash()">Salva alert</button>
               <p class="hint" id="reentryHint">Rientro: Pro + nome + codice.</p>
@@ -134,10 +140,9 @@
         <p class="kicker">LAUNCH PACK · 7,99 €</p>
         <h2>Non compri un PDF. Compri i sigilli.</h2>
         <ul class="perks">
-          <li><strong>Vault Pro a tempo</strong> — 6 dossier. Si aprono il 12 e il 19 novembre.</li>
-          <li><strong>Briefing del giorno</strong></li>
-          <li><strong>Pin firmati</strong></li>
-          <li><strong>Checklist + alert</strong></li>
+          <li><strong>Vault Pro a tempo</strong></li>
+          <li><strong>Sala pack</strong> — bacheca chiusa, solo chi ha attivato.</li>
+          <li><strong>Pin firmati + alert</strong></li>
         </ul>
         <div class="price"><strong>7,99 €</strong><span>una tantum · demo</span></div>
         <div class="pin-form" style="margin:18px 0">
@@ -165,5 +170,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="app.js"></script>
   <script src="vault.js"></script>
+  <script src="sala.js"></script>
 </body>
 </html>
