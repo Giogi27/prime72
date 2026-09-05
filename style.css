@@ -63,7 +63,7 @@ h1, .lead { text-shadow: 0 2px 18px rgba(0,0,0,.75); }
 .btn { border: 0; cursor: pointer; font: inherit; font-weight: 600; padding: 12px 18px; border-radius: 999px; }
 .btn.primary { background: linear-gradient(90deg, var(--pink), #ff6b3d); color: #1a0610; }
 .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
-.btn.full { width: 100%; }
+.btn.full { width: 100%; margin-top: 8px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
 .tag { font-size: 11px; letter-spacing: .14em; color: var(--gold); }
 .tag.live { color: #ff4d4d; }
@@ -77,7 +77,7 @@ h1, .lead { text-shadow: 0 2px 18px rgba(0,0,0,.75); }
 #map { height: 520px; border-radius: 14px; }
 .pin-form { background: rgba(18,10,28,.88); border: 1px solid var(--line); border-radius: 18px; padding: 16px; }
 .pin-form input, .pin-form select, .pin-form textarea,
-#view-pro input, #view-admin input {
+#view-pro input, #view-admin input, #dashEmail {
   width: 100%; margin-bottom: 8px; padding: 10px 12px; border-radius: 10px;
   border: 1px solid var(--line); background: #110818; color: var(--text); font: inherit;
 }
@@ -94,8 +94,13 @@ h1, .lead { text-shadow: 0 2px 18px rgba(0,0,0,.75); }
 .opts { display: grid; gap: 8px; }
 .opts button { text-align: left; background: #120818; color: var(--text); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; cursor: pointer; font: inherit; }
 .result { border: 1px solid var(--pink); border-radius: 18px; padding: 24px; background: var(--card); }
-.pro-hero { max-width: 560px; }
+.pro-hero { max-width: 640px; }
+.price { margin: 18px 0; }
 .price strong { font-size: 48px; font-family: "Bebas Neue", sans-serif; }
+.price span { display: block; color: var(--muted); }
+.perks { margin: 16px 0; padding-left: 18px; color: var(--muted); }
+.perks li { margin: 10px 0; }
+.perks strong { color: var(--text); }
 footer {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 15;
   text-align: center; color: #c9bdd4; font-size: 12px;
@@ -142,13 +147,19 @@ footer {
 }
 .cockpit-pips b { display: block; font-family: "Bebas Neue", sans-serif; font-size: 22px; }
 .cockpit-pips i { font-style: normal; font-size: 10px; color: var(--muted); text-transform: uppercase; }
-.dash-status b { color: var(--cyan); letter-spacing: .2em; font-size: 12px; }
+.dash-status b { color: var(--cyan); letter-spacing: .2em; font-size: 12px; display: block; }
+.dash-actions { text-align: right; }
 .cockpit-body { display: grid; grid-template-columns: 1.35fr .8fr; gap: 12px; padding: 14px; }
 .cockpit-side { display: grid; gap: 12px; }
 .hud {
   background: rgba(18,10,28,.72); border: 1px solid rgba(255,45,149,.18);
-  border-radius: 16px; padding: 16px; min-height: 160px;
+  border-radius: 16px; padding: 16px; min-height: 120px;
 }
+.check-row {
+  display: flex; gap: 10px; align-items: flex-start;
+  margin: 8px 0; color: #eee; font-size: 14px;
+}
+.check-row input { margin-top: 3px; }
 .play { margin: 10px 0 0 18px; color: #ddd; line-height: 1.55; }
 @media (max-width: 860px) {
   .map-wrap, .cockpit-top, .cockpit-body { grid-template-columns: 1fr; }
