@@ -68,7 +68,6 @@ h1, .lead { text-shadow: 0 2px 18px rgba(0,0,0,.75); }
 .tag { font-size: 11px; letter-spacing: .14em; color: var(--gold); }
 .tag.live { color: #ff4d4d; }
 .panel-head { margin-bottom: 16px; }
-.panel-head p { color: var(--muted); margin-top: 6px; }
 .map-wrap {
   display: grid; grid-template-columns: 1fr 280px; gap: 12px;
   background: rgba(8,4,14,.72); border: 1px solid var(--line);
@@ -82,10 +81,7 @@ h1, .lead { text-shadow: 0 2px 18px rgba(0,0,0,.75); }
   border: 1px solid var(--line); background: #110818; color: var(--text); font: inherit;
 }
 .hint { color: var(--muted); font-size: 12px; margin-top: 10px; }
-.ticker {
-  overflow: hidden; white-space: nowrap; border: 1px solid var(--line);
-  border-radius: 999px; padding: 10px 0; margin-bottom: 16px; background: #160b1e;
-}
+.ticker { overflow: hidden; white-space: nowrap; border: 1px solid var(--line); border-radius: 999px; padding: 10px 0; margin-bottom: 16px; background: #160b1e; }
 .ticker span { display: inline-block; padding-left: 100%; animation: tick 28s linear infinite; color: var(--cyan); font-size: 13px; }
 @keyframes tick { to { transform: translateX(-100%); } }
 .feed { display: flex; flex-direction: column; gap: 10px; }
@@ -95,9 +91,7 @@ h1, .lead { text-shadow: 0 2px 18px rgba(0,0,0,.75); }
 .opts button { text-align: left; background: #120818; color: var(--text); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; cursor: pointer; font: inherit; }
 .result { border: 1px solid var(--pink); border-radius: 18px; padding: 24px; background: var(--card); }
 .pro-hero { max-width: 640px; }
-.price { margin: 18px 0; }
 .price strong { font-size: 48px; font-family: "Bebas Neue", sans-serif; }
-.price span { display: block; color: var(--muted); }
 .perks { margin: 16px 0; padding-left: 18px; color: var(--muted); }
 .perks li { margin: 10px 0; }
 .perks strong { color: var(--text); }
@@ -117,10 +111,7 @@ footer {
   display: flex; align-items: center; justify-content: center;
   font-size: 20px; background: #140c1c; border: 2px solid #ff2d95;
 }
-#view-admin {
-  max-width: 720px; margin: 0 auto; padding: 24px 20px 48px;
-  background: rgba(10,6,18,.78); border: 1px solid var(--line); border-radius: 20px;
-}
+#view-admin { max-width: 720px; margin: 0 auto; padding: 24px 20px 48px; background: rgba(10,6,18,.78); border: 1px solid var(--line); border-radius: 20px; }
 #adminMap { height: 340px; border-radius: 14px; margin: 16px 0; }
 .op-preview, .dash-avatar {
   width: 64px; height: 64px; border-radius: 50%;
@@ -130,10 +121,7 @@ footer {
 }
 .op-preview { margin: 12px 0; width: 88px; height: 88px; }
 .op-preview img, .dash-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.cockpit {
-  background: rgba(8,4,14,.92); border: 1px solid rgba(255,255,255,.12);
-  border-radius: 22px; overflow: hidden;
-}
+.cockpit { background: rgba(8,4,14,.92); border: 1px solid rgba(255,255,255,.12); border-radius: 22px; overflow: hidden; }
 .cockpit-top {
   display: grid; grid-template-columns: auto 1fr auto auto;
   gap: 16px; align-items: center; padding: 16px 18px;
@@ -141,26 +129,21 @@ footer {
 }
 .cockpit-who h2 { font-size: 40px; line-height: .9; margin: 0; }
 .cockpit-pips { display: flex; gap: 8px; }
-.cockpit-pips div {
-  min-width: 72px; text-align: center; padding: 8px 10px;
-  border: 1px solid var(--line); border-radius: 12px;
-}
+.cockpit-pips div { min-width: 72px; text-align: center; padding: 8px 10px; border: 1px solid var(--line); border-radius: 12px; }
 .cockpit-pips b { display: block; font-family: "Bebas Neue", sans-serif; font-size: 22px; }
 .cockpit-pips i { font-style: normal; font-size: 10px; color: var(--muted); text-transform: uppercase; }
 .dash-status b { color: var(--cyan); letter-spacing: .2em; font-size: 12px; display: block; }
 .dash-actions { text-align: right; }
 .cockpit-body { display: grid; grid-template-columns: 1.35fr .8fr; gap: 12px; padding: 14px; }
 .cockpit-side { display: grid; gap: 12px; }
-.hud {
-  background: rgba(18,10,28,.72); border: 1px solid rgba(255,45,149,.18);
-  border-radius: 16px; padding: 16px; min-height: 120px;
-}
-.check-row {
-  display: flex; gap: 10px; align-items: flex-start;
-  margin: 8px 0; color: #eee; font-size: 14px;
-}
-.check-row input { margin-top: 3px; }
-.play { margin: 10px 0 0 18px; color: #ddd; line-height: 1.55; }
+.hud { background: rgba(18,10,28,.72); border: 1px solid rgba(255,45,149,.18); border-radius: 16px; padding: 16px; min-height: 120px; }
+.check-row { display: flex; gap: 10px; align-items: flex-start; margin: 8px 0; color: #eee; font-size: 14px; }
+.brief { margin: 0 14px; padding: 12px 14px; border-bottom: 1px solid var(--line); color: var(--cyan); font-size: 14px; }
+.vault-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.crate { background: rgba(0,0,0,.35); border: 1px solid var(--line); border-radius: 14px; padding: 12px; min-height: 110px; }
+.crate.open { border-color: rgba(61,240,255,.35); }
+.crate h4 { font-size: 15px; margin: 4px 0 6px; }
+.crate .seal { font-size: 11px; letter-spacing: .12em; color: var(--gold); text-transform: uppercase; }
 @media (max-width: 860px) {
-  .map-wrap, .cockpit-top, .cockpit-body { grid-template-columns: 1fr; }
+  .map-wrap, .cockpit-top, .cockpit-body, .vault-grid { grid-template-columns: 1fr; }
 }
