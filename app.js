@@ -3,8 +3,10 @@ const STORE_PINS = "p72_pins";
 const STORE_FEED = "p72_feed";
 const STORE_ALERT = "p72_alert";
 const SB_URL = "https://soskkfqeudtqfarzjlal.supabase.co";
-const SB_KEY = "LA_TUA_CHIAVE";
+const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvc2trZnFldWR0cWZhcnpqbGFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg1ODg5NzIsImV4cCI6MjEwNDE2NDk3Mn0.zxvsRI0_PHU5-xCvpgJlWySnBbCemxbPuI6Zpx7HQLw";
 const sb = window.supabase ? window.supabase.createClient(SB_URL, SB_KEY) : null;
+
+function tickCountdown() {
   const now = new Date();
   let diff = Math.max(0, LAUNCH - now);
   const d = Math.floor(diff / 86400000);
@@ -29,12 +31,13 @@ function show(name) {
   });
   if (name === "map") setTimeout(initMap, 60);
 }
+document.querySelectorAll(".nav button").forEach((b) => {
+  b.addEventListener("click", () => show(b.dataset.view));
+});
 window.addEventListener("hashchange", function () {
   if (location.hash === "#admin") show("admin");
 });
-if (location.hash === "#admin") show("admin");document.querySelectorAll(".nav button").forEach((b) => {
-  b.addEventListener("click", () => show(b.dataset.view));
-});
+if (location.hash === "#admin") show("admin");
 
 function toast(msg) {
   const t = document.getElementById("toast");
@@ -58,11 +61,11 @@ function saveJSON(key, val) {
 }
 
 const seedPins = [
-  { lat: 25.7617, lng: -80.1918, title: "Vice City downtown", type: "Quartiere", note: "Skyline Extended Look + Trailer 2" },
-  { lat: 25.7907, lng: -80.13, title: "South Beach analog", type: "Spiaggia", note: "Palme e cabrio" },
-  { lat: 25.778, lng: -80.187, title: "Porto container", type: "Quartiere", note: "Inquadratura aerea tramonto" },
-  { lat: 25.806, lng: -80.122, title: "Locale neon", type: "Locale", note: "Insegne rosa/ciano" },
-  { lat: 25.73, lng: -80.24, title: "Residenziale interno", type: "Quartiere", note: "Case basse, traffico diurno" }
+  { lat: 25.7617, lng: -80.1918, title: "Vice City downtown", type: "Quartiere", note: "Skyline" },
+  { lat: 25.7907, lng: -80.13, title: "South Beach analog", type: "Spiaggia", note: "Palme" },
+  { lat: 25.778, lng: -80.187, title: "Porto container", type: "Quartiere", note: "Trailer" },
+  { lat: 25.806, lng: -80.122, title: "Locale neon", type: "Locale", note: "Insegne" },
+  { lat: 25.73, lng: -80.24, title: "Residenziale interno", type: "Quartiere", note: "Case" }
 ];
 
 let map, pendingLatLng, userPins = loadJSON(STORE_PINS, []);
@@ -73,19 +76,17 @@ function initMap() {
     return;
   }
   map = L.map("map").setView([25.77, -80.18], 12);
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-    attribution: "&copy; OSM &copy; CARTO",
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "&copy; OSM",
     maxZoom: 19
   }).addTo(map);
-    seedPins.concat(userPins).forEach(placePin);
-  sb.from("pins").select("*").then(function (res) {
-    if (res.error) {
-      toast("Pin cloud: " + res.error.message);
-      return;
-    }
-    (res.data || []).forEach(placePin);
-  });
-  map.on("click", (e) => {
+  seedPins.concat(userPins).forEach(placePin);
+  if (sb) {
+    sb.from("pins").select("*").then(function (res) {
+      (res.data || []).forEach(placePin);
+    });
+  }
+  map.on("click", function (e) {
     pendingLatLng = e.latlng;
     toast("Punto selezionato. Compila e pubblica.");
   });
@@ -115,22 +116,6 @@ function placePin(p) {
     .addTo(map)
     .bindPopup("<strong>" + p.title + "</strong><br><em>" + p.type + "</em><br>" + (p.note || ""));
 }
-  const emoji = mapType[type] || "📍";
-  return L.divIcon({
-    className: "p72-pin",
-    html: '<div class="p72-pin-inner">' + emoji + "</div>",
-    iconSize: [36, 36],
-    iconAnchor: [18, 36],
-    popupAnchor: [0, -28]
-  });
-}
-
-function placePin(p) {
-  if (!map) return;
-  L.marker([p.lat, p.lng], { icon: pinIcon(p.type) })
-    .addTo(map)
-    .bindPopup("<strong>" + p.title + "</strong><br><em>" + p.type + "</em><br>" + (p.note || ""));
-}
 
 async function addPin() {
   const title = document.getElementById("pinTitle").value.trim();
@@ -139,10 +124,10 @@ async function addPin() {
   if (!pendingLatLng) return toast("Clicca prima un punto sulla mappa.");
   if (!title) return toast("Dai un nome alla location.");
   const pin = { lat: pendingLatLng.lat, lng: pendingLatLng.lng, title: title, type: type, note: note };
-  placePin(pin);
+  if (!sb) return toast("Database non collegato.");
   const { error } = await sb.from("pins").insert(pin);
-  if (error) toast("Pin locale ok, cloud: " + error.message);
-      else toast("Inviato. Online solo dopo il tuo ok in Admin.");
+  if (error) toast("Errore: " + error.message);
+  else toast("Inviato. Online solo dopo il tuo ok in Admin.");
   document.getElementById("pinTitle").value = "";
   document.getElementById("pinNote").value = "";
   pendingLatLng = null;
@@ -164,7 +149,7 @@ async function renderFeed() {
     if (res.error) throw res.error;
     rows = res.data || [];
   } catch (e) {
-    rows = loadJSON(STORE_FEED, []);
+    rows = [];
   }
   const fromCloud = rows.map(function (r) {
     return { votes: r.votes || 1, text: r.body || r.text, t: "cloud" };
@@ -173,7 +158,7 @@ async function renderFeed() {
   box.innerHTML = all.map(function (r) {
     return '<article class="item"><div class="meta"><span class="votes">▲ ' +
       (r.votes || 1) + "</span> " +
-      (r.t === "cloud" ? "community" : r.t === "seed" ? "esempio" : "tu") +
+      (r.t === "cloud" ? "community" : "esempio") +
       "</div><p>" + r.text + "</p></article>";
   }).join("");
 }
@@ -183,10 +168,7 @@ async function addDiscovery() {
   const text = (input && input.value ? input.value : "").trim();
   if (!text) return toast("Scrivi la scoperta.");
   const { error } = await sb.from("discoveries").insert({ body: text });
-  if (error) {
-    toast("Errore: " + error.message);
-    return;
-  }
+  if (error) return toast("Errore: " + error.message);
   input.value = "";
   toast("Pubblicata per tutti.");
   renderFeed();
@@ -194,7 +176,7 @@ async function addDiscovery() {
 
 const ticker = document.getElementById("ticker");
 if (ticker) {
-  ticker.innerHTML = "<span>LAUNCH · 19 NOV 2026 &nbsp;|&nbsp; PRELOAD · 12 NOV &nbsp;|&nbsp; PIN IN LOCALE</span>";
+  ticker.innerHTML = "<span>LAUNCH · 19 NOV 2026 &nbsp;|&nbsp; PRELOAD · 12 NOV</span>";
 }
 renderFeed();
 
@@ -242,11 +224,11 @@ function saveAlert() {
   saveJSON(STORE_ALERT, { email: email, at: Date.now() });
   toast("Alert salvato in locale.");
 }
-
 function fakeCheckout() {
   toast("Pro in waitlist. Stripe al giorno 4.");
   localStorage.setItem("prime72_pro", "waitlist");
-} 
+}
+
 async function loadPending() {
   const secret = document.getElementById("adminSecret").value.trim();
   const box = document.getElementById("adminList");
@@ -267,7 +249,6 @@ async function loadPending() {
       p.id + "\", false)'>Elimina</button></article>";
   }).join("");
 }
-
 async function modPin(id, ok) {
   const secret = document.getElementById("adminSecret").value.trim();
   const { error } = await sb.rpc("set_pin_approved", { pid: id, secret: secret, ok: ok });
@@ -275,5 +256,3 @@ async function modPin(id, ok) {
   toast(ok ? "Approvato" : "Eliminato");
   loadPending();
 }
-
-if (location.hash === "#admin") show("admin");
