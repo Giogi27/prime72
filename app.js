@@ -256,3 +256,5 @@ async function modPin(id, ok) {
   toast(ok ? "Approvato" : "Eliminato");
   loadPending();
 }
+
+ 
