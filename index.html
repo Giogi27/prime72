@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>PRIME 72 — GTA VI 19 novembre 2026</title>
+  <title>PRIME 72</title>
   <meta name="theme-color" content="#0a0612" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,29 +20,38 @@
       <div><strong>PRIME 72</strong><small>19 NOV 2026</small></div>
     </div>
     <nav class="nav">
-      <button data-view="home">Home</button>
-      <button data-view="map">Mappa</button>
-      <button data-view="feed">Gara</button>
-      <button data-view="quiz">Profilo</button>
-      <button data-view="dash" id="navDash" hidden>Console</button>
-      <button data-view="pro" class="pro-btn">Pro</button>
+      <button data-view="home" data-i18n="navHome">Home</button>
+      <button data-view="map" data-i18n="navMap">Mappa</button>
+      <button data-view="feed" data-i18n="navRace">Gara</button>
+      <button data-view="quiz" data-i18n="navProfile">Profilo</button>
+      <button data-view="dash" id="navDash" hidden data-i18n="navDash">Console</button>
+      <button data-view="pro" class="pro-btn" data-i18n="navPro">Pro</button>
+      <select id="langSel" onchange="setLang(this.value)" aria-label="Language">
+        <option value="it">IT</option>
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+        <option value="fr">FR</option>
+        <option value="de">DE</option>
+        <option value="pt">PT</option>
+        <option value="ja">JP</option>
+      </select>
     </nav>
   </header>
   <main>
     <section id="view-home" class="view active">
       <div class="hero">
-        <p class="kicker">GTA VI · 19 NOVEMBRE 2026</p>
-        <h1>Il lancio è per tutti.<br>Le prime 72 ore no.</h1>
-        <p class="lead">Countdown, mappa, guide e cheat di gioco che si aprono alle date.</p>
+        <p class="kicker" data-i18n="kickerHome">GTA VI · 19 NOVEMBRE 2026</p>
+        <h1><span data-i18n="h1a">Il lancio è per tutti.</span><br><span data-i18n="h1b">Le prime 72 ore no.</span></h1>
+        <p class="lead" data-i18n="leadHome">Countdown, mappa, guide e comandi di gioco che si aprono alle date.</p>
         <div class="countdown" id="countdown">
-          <div><b id="d">--</b><span>giorni</span></div>
-          <div><b id="h">--</b><span>ore</span></div>
-          <div><b id="m">--</b><span>min</span></div>
-          <div><b id="s">--</b><span>sec</span></div>
+          <div><b id="d">--</b><span data-i18n="days">giorni</span></div>
+          <div><b id="h">--</b><span data-i18n="hours">ore</span></div>
+          <div><b id="m">--</b><span data-i18n="mins">min</span></div>
+          <div><b id="s">--</b><span data-i18n="secs">sec</span></div>
         </div>
         <div class="cta-row">
-          <button class="btn primary" type="button" onclick="show('map')">Apri la mappa</button>
-          <button class="btn ghost" type="button" onclick="goConsoleOrPro()">Entra in console</button>
+          <button class="btn primary" type="button" onclick="show('map')" data-i18n="ctaMap">Apri la mappa</button>
+          <button class="btn ghost" type="button" onclick="goConsoleOrPro()" data-i18n="ctaConsole">Entra in console</button>
         </div>
       </div>
     </section>
@@ -50,81 +59,81 @@
       <div class="map-stage">
         <div id="map"></div>
         <div class="radar-bar">
-          <button type="button" class="active" data-filter="Tutti" onclick="setMapFilter('Tutti')">Tutti</button>
-          <button type="button" data-filter="Locale" onclick="setMapFilter('Locale')">Locale</button>
-          <button type="button" data-filter="Spiaggia" onclick="setMapFilter('Spiaggia')">Spiaggia</button>
-          <button type="button" data-filter="Quartiere" onclick="setMapFilter('Quartiere')">Quartiere</button>
-          <button type="button" data-filter="Missione" onclick="setMapFilter('Missione')">Missione</button>
-          <button type="button" data-filter="Easter egg" onclick="setMapFilter('Easter egg')">Easter</button>
+          <button type="button" class="active" data-filter="Tutti" onclick="setMapFilter('Tutti')" data-i18n="all">Tutti</button>
+          <button type="button" data-filter="Locale" onclick="setMapFilter('Locale')" data-i18n="loc">Locale</button>
+          <button type="button" data-filter="Spiaggia" onclick="setMapFilter('Spiaggia')" data-i18n="beach">Spiaggia</button>
+          <button type="button" data-filter="Quartiere" onclick="setMapFilter('Quartiere')" data-i18n="hood">Quartiere</button>
+          <button type="button" data-filter="Missione" onclick="setMapFilter('Missione')" data-i18n="mission">Missione</button>
+          <button type="button" data-filter="Easter egg" onclick="setMapFilter('Easter egg')" data-i18n="easter">Easter</button>
         </div>
         <aside class="map-dock pin-form">
-          <p class="hint" id="mapHint">Tocca la mappa, dai un nome, invia.</p>
-          <h4>Nuovo segnale</h4>
-          <input id="pinTitle" placeholder="Nome location" />
+          <p class="hint" id="mapHint" data-i18n="mapHint">Tocca la mappa, dai un nome, invia.</p>
+          <h4 data-i18n="newSignal">Nuovo segnale</h4>
+          <input id="pinTitle" data-i18n-placeholder="pinName" placeholder="Nome location" />
           <select id="pinType"><option>Locale</option><option>Spiaggia</option><option>Quartiere</option><option>Missione</option><option>Easter egg</option></select>
-          <textarea id="pinNote" rows="2" placeholder="Nota corta"></textarea>
-          <button class="btn primary full" type="button" onclick="addPin()">Invia</button>
-          <p class="kicker" style="margin-top:16px" id="radarCount">0 segnali</p>
+          <textarea id="pinNote" rows="2" data-i18n-placeholder="pinNote" placeholder="Nota corta"></textarea>
+          <button class="btn primary full" type="button" onclick="addPin()" data-i18n="send">Invia</button>
+          <p class="kicker" style="margin-top:16px" id="radarCount">0</p>
           <div id="radarList"></div>
         </aside>
       </div>
     </section>
     <section id="view-feed" class="view">
       <div class="race-hero">
-        <p class="kicker">GARA MENSILE</p>
-        <h2>Classifica pin</h2>
-        <p class="lead">Chi scopre più posti validi sulla mappa vince il mese.</p>
+        <p class="kicker" data-i18n="raceKicker">STAGIONE 1 · LANCIO</p>
+        <h2 data-i18n="raceTitle">Classifica pin</h2>
+        <p class="lead" data-i18n="raceLead">Parte il 19 novembre 2026 e chiude dopo 30 giorni. Poi arrivano altre gare.</p>
         <p id="raceYou" class="race-pos"></p>
       </div>
       <div class="race-grid">
         <div>
-          <h3>Classifica</h3>
+          <h3 data-i18n="boardTitle">Classifica</h3>
           <div id="raceBoard" class="race-board"></div>
         </div>
         <aside class="race-aside">
           <article class="hud">
-            <h3>Come si gioca</h3>
+            <h3 data-i18n="raceHow">Come si gioca</h3>
             <ol class="race-ol">
-              <li>Compra il Launch Pack (7,99 €).</li>
-              <li>Metti il tuo nome in Profilo.</li>
-              <li>Apri Mappa, tocca un punto, dai un nome, Invia.</li>
-              <li>Se il pin è reale entra in classifica.</li>
+              <li data-i18n="race1">Attiva l’abbonamento mensile.</li>
+              <li data-i18n="race2">Metti il tuo nome in Profilo.</li>
+              <li data-i18n="race3">Apri Mappa, tocca un punto, dai un nome, Invia.</li>
+              <li data-i18n="race4">Se il pin è reale entra in classifica.</li>
             </ol>
-            <button class="btn primary full" type="button" onclick="show('map')">Piazza un pin</button>
+            <button class="btn primary full" type="button" onclick="show('map')" data-i18n="raceDrop">Piazza un pin</button>
           </article>
           <article class="hud">
-            <h3>Regole</h3>
+            <h3 data-i18n="raceRules">Regole</h3>
             <ul class="race-rules">
-              <li>Contano solo i pin accettati.</li>
-              <li>Doppi e fake non valgono.</li>
-              <li>Reset il 1° di ogni mese.</li>
+              <li data-i18n="rule1">Contano solo i pin accettati.</li>
+              <li data-i18n="rule2">Doppi e fake non valgono.</li>
+              <li data-i18n="rule3">Stagione 1: 19 nov – 19 dic 2026.</li>
             </ul>
           </article>
           <article class="hud">
-            <h3>Premio di settembre</h3>
-            <p>Gift card PlayStation o codice sconto, inviato via email al primo.</p>
+            <h3 data-i18n="prizeTitle">Premio stagione 1</h3>
+            <p data-i18n="prizeBody">Gift card PlayStation o codice sconto, via email al primo.</p>
           </article>
           <article class="hud" id="raceCta">
-            <h3>Launch Pack</h3>
+            <h3 data-i18n="packTitle">PRIME 72</h3>
             <ul class="race-rules">
-              <li>Entri in questa gara</li>
-              <li>Guide 12 e 19 novembre</li>
-              <li>Cheat dal 19 novembre</li>
-              <li>Sala + pin col tuo nome</li>
+              <li data-i18n="pack1">Entri in questa gara</li>
+              <li data-i18n="pack2">Guide 12 e 19 novembre</li>
+              <li data-i18n="pack3">Comandi dal 19 novembre</li>
+              <li data-i18n="pack4">Sala + pin col tuo nome</li>
             </ul>
-            <button class="btn primary full" type="button" onclick="show('pro')">Sblocca pack 7,99 €</button>
+            <button class="btn primary full" type="button" onclick="show('pro')" data-i18n="packBtn">Abbonati 4,99 € / mese</button>
           </article>
         </aside>
       </div>
     </section>
     <section id="view-quiz" class="view">
-      <div class="panel-head"><h2>Operatore</h2></div>
+      <div class="panel-head"><h2 data-i18n="opTitle">Operatore</h2></div>
       <div class="pin-form" style="max-width:520px">
-        <input id="opName" placeholder="Nome in strada" />
-        <input id="opCrew" placeholder="Tag crew" />
+        <input id="opName" data-i18n-placeholder="streetName" placeholder="Nome in strada" />
+        <input id="opCrew" data-i18n-placeholder="crewTag" placeholder="Tag crew" />
         <input id="opPhoto" type="file" accept="image/*" />
         <div id="opPreview" class="op-preview"></div>
-        <button class="btn primary" type="button" onclick="saveOperator()">Salva identita</button>
+        <button class="btn primary" type="button" onclick="saveOperator()" data-i18n="saveId">Salva identita</button>
       </div>
       <div class="quiz" id="quizBox"></div>
     </section>
@@ -133,47 +142,39 @@
         <header class="cockpit-top">
           <div class="dash-avatar" id="dashAvatar">72</div>
           <div class="cockpit-who">
-            <span class="kicker">CONSOLE PRO</span>
+            <span class="kicker">CONSOLE</span>
             <h2 id="dashName">Operatore</h2>
-            <p id="dashCrew">senza crew</p>
+            <p id="dashCrew"></p>
           </div>
           <div class="cockpit-pips">
             <div><b id="kpiPins">0</b><i>pin</i></div>
-            <div><b id="kpiDone">0/8</b><i>checklist</i></div>
-            <div><b id="kpiVault">0/6</b><i>guide</i></div>
+            <div><b id="kpiDone">0/8</b><i>ok</i></div>
+            <div><b id="kpiVault">0/6</b><i>vault</i></div>
             <div><b>19.11</b><i>drop</i></div>
           </div>
           <div class="dash-actions">
             <div class="dash-status"><b>LIVE</b></div>
-            <button class="btn ghost" type="button" onclick="logoutConsole()">Esci</button>
+            <button class="btn ghost" type="button" onclick="logoutConsole()">Exit</button>
           </div>
         </header>
         <div class="brief" id="dailyBrief"></div>
         <div class="cockpit-body">
           <article class="hud hud-main">
-            <span class="tag live">GUIDE</span>
-            <h3>Si aprono il 12 e il 19</h3>
+            <span class="tag live">VAULT</span>
             <div id="vaultGrid" class="vault-grid"></div>
-            <h3 style="margin-top:16px">Checklist prima notte</h3>
             <div id="checkList"></div>
           </article>
           <div class="cockpit-side">
             <article class="hud">
-              <span class="tag live">SALA</span>
-              <h3>Chi ha il pack</h3>
-              <textarea id="salaText" rows="3" placeholder="Messaggio (max 280)"></textarea>
-              <button class="btn primary full" type="button" onclick="addSala()">Pubblica</button>
+              <textarea id="salaText" rows="3" maxlength="280"></textarea>
+              <button class="btn primary full" type="button" onclick="addSala()">OK</button>
               <div id="salaList" class="feed" style="margin-top:10px"></div>
             </article>
+            <article class="hud"><div id="myPins"></div></article>
             <article class="hud">
-              <span class="tag">I TUOI PIN</span>
-              <div id="myPins">Nessun pin firmato.</div>
-            </article>
-            <article class="hud">
-              <span class="tag">ALERT</span>
-              <input id="dashEmail" placeholder="email per il 12 e il 19" />
-              <button class="btn primary full" type="button" onclick="saveAlertFromDash()">Salva email</button>
-              <p class="hint" id="reentryHint">Rientro: Pro + nome + codice.</p>
+              <input id="dashEmail" placeholder="email" />
+              <button class="btn primary full" type="button" onclick="saveAlertFromDash()">OK</button>
+              <p class="hint" id="reentryHint"></p>
             </article>
           </div>
         </div>
@@ -182,42 +183,42 @@
     <section id="view-pro" class="view">
       <div class="pro-hero">
         <div class="pro-copy">
-          <p class="kicker">LAUNCH PACK · 7,99 €</p>
-          <h2>Il 19 novembre<br>non partire a caso.</h2>
-          <p class="lead">Guide, sala, pin, gara e cheat di gioco.</p>
+          <p class="kicker" data-i18n="proKicker">ABBONAMENTO · 4,99 € / MESE</p>
+          <h2><span data-i18n="proH2a">Il 19 novembre</span><br><span data-i18n="proH2b">non partire a caso.</span></h2>
+          <p class="lead" data-i18n="proLead">Guide, sala, pin, gara e comandi di gioco.</p>
           <ul class="perks">
-            <li><strong>Gara pin</strong> — classifica mensile e premio via email.</li>
-            <li><strong>Guide di completamento</strong> — 12 e 19 novembre.</li>
-            <li><strong>Cheat di gioco</strong> — si aprono il 19 novembre.</li>
-            <li><strong>Prima notte</strong> — cosa fare nelle prime 8 ore.</li>
-            <li><strong>Sala pack + pin col tuo nome</strong></li>
+            <li data-i18n="perkRace">Gara pin — stagione 1 dal lancio, poi nuove gare.</li>
+            <li data-i18n="perkGuide">Guide di completamento — 12 e 19 novembre.</li>
+            <li data-i18n="perkCheat">Comandi di gioco — dal 19 novembre.</li>
+            <li data-i18n="perkNight">Prima notte — le prime 8 ore.</li>
+            <li data-i18n="perkSala">Sala + pin col tuo nome</li>
           </ul>
-          <div class="price"><strong>7,99 €</strong><span>una tantum</span></div>
+          <div class="price"><strong>4,99 €</strong><span data-i18n="month">al mese</span></div>
         </div>
         <div class="pin-form">
-          <h4>Attiva la console</h4>
-          <label class="hint">Nome sui pin e in sala</label>
+          <h4 data-i18n="activate">Attiva la console</h4>
+          <label class="hint" data-i18n="namePins">Nome sui pin e in sala</label>
           <input id="loginName" placeholder="Enrico" />
-          <label class="hint">Codice per rientrare (min 4)</label>
+          <label class="hint" data-i18n="codeBack">Codice per rientrare (min 4)</label>
           <input id="loginCode" placeholder="VC72EN" />
-          <button class="btn primary full" type="button" onclick="payWithStripe()">Paga 7,99 €</button>
-          <button class="btn ghost full" type="button" onclick="activatePack()">Attiva ora (Stripe in attesa)</button>
-          <button class="btn ghost full" type="button" onclick="loginConsole()">Ho gia il pack</button>
+          <button class="btn primary full" type="button" onclick="payWithStripe()" data-i18n="pay">Paga 4,99 € / mese</button>
+          <button class="btn ghost full" type="button" onclick="loginConsole()" data-i18n="already">Ho gia l’abbonamento</button>
         </div>
       </div>
     </section>
     <section id="view-admin" class="view">
-      <div class="panel-head"><h2>Centro controllo</h2></div>
-      <input id="adminSecret" type="password" placeholder="password admin" />
-      <button class="btn primary" type="button" onclick="loadPending()">Carica in attesa</button>
+      <div class="panel-head"><h2>Admin</h2></div>
+      <input id="adminSecret" type="password" />
+      <button class="btn primary" type="button" onclick="loadPending()">Load</button>
       <div id="adminMap"></div>
       <div id="adminList"></div>
     </section>
   </main>
-  <footer><p>Prototipo indipendente.</p></footer>
+  <footer><p data-i18n="footer">Prototipo indipendente.</p></footer>
   <div id="toast" hidden></div>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="i18n.js"></script>
   <script src="app.js"></script>
   <script src="map-radar.js"></script>
   <script src="map-skin.js"></script>
