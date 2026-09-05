@@ -32,7 +32,7 @@
       <div class="hero">
         <p class="kicker">GTA VI · 19 NOVEMBRE 2026</p>
         <h1>Il lancio è per tutti.<br>Le prime 72 ore no.</h1>
-        <p class="lead">Countdown, mappa e vault per il drop di GTA VI.</p>
+        <p class="lead">Countdown, mappa e piano per la prima notte.</p>
         <div class="countdown" id="countdown">
           <div><b id="d">--</b><span>giorni</span></div>
           <div><b id="h">--</b><span>ore</span></div>
@@ -44,9 +44,9 @@
           <button class="btn ghost" type="button" onclick="goConsoleOrPro()">Entra in console</button>
         </div>
         <div class="tease">
-          <article><b>SIGILLO 12.11</b><span>Dossier preload</span></article>
-          <article><b>SIGILLO 19.11</b><span>Drop 72 ore</span></article>
-          <article><b>SOLO PRO</b><span>Sala + rotte</span></article>
+          <article><b>12 NOV</b><span>Preload in console</span></article>
+          <article><b>19 NOV</b><span>Piano prime 72 ore</span></article>
+          <article><b>PACK</b><span>Sala + pin col tuo nome</span></article>
         </div>
       </div>
     </section>
@@ -106,29 +106,28 @@
         <div class="brief" id="dailyBrief"></div>
         <div class="cockpit-body">
           <article class="hud hud-main">
-            <span class="tag live">VAULT PRO</span>
-            <h3>Dossier a tempo</h3>
+            <span class="tag live">VAULT</span>
+            <h3>Si apre alle date</h3>
             <div id="vaultGrid" class="vault-grid"></div>
-            <h3 style="margin-top:16px">Checklist 72 ore</h3>
+            <h3 style="margin-top:16px">Checklist prima notte</h3>
             <div id="checkList"></div>
           </article>
           <div class="cockpit-side">
             <article class="hud">
-              <span class="tag live">SALA PACK</span>
-              <h3>Solo chi ha il pack</h3>
-              <textarea id="salaText" rows="3" placeholder="Messaggio in sala (max 280)"></textarea>
-              <button class="btn primary full" type="button" onclick="addSala()">Pubblica in sala</button>
+              <span class="tag live">SALA</span>
+              <h3>Chi ha il pack</h3>
+              <textarea id="salaText" rows="3" placeholder="Messaggio (max 280)"></textarea>
+              <button class="btn primary full" type="button" onclick="addSala()">Pubblica</button>
               <div id="salaList" class="feed" style="margin-top:10px"></div>
             </article>
             <article class="hud">
-              <span class="tag">SIGNAL</span>
-              <h3>I tuoi pin</h3>
+              <span class="tag">I TUOI PIN</span>
               <div id="myPins">Nessun pin firmato.</div>
             </article>
             <article class="hud">
               <span class="tag">ALERT</span>
-              <input id="dashEmail" placeholder="tua email" />
-              <button class="btn primary full" type="button" onclick="saveAlertFromDash()">Salva alert</button>
+              <input id="dashEmail" placeholder="email per il 12 e il 19" />
+              <button class="btn primary full" type="button" onclick="saveAlertFromDash()">Salva email</button>
               <p class="hint" id="reentryHint">Rientro: Pro + nome + codice.</p>
             </article>
           </div>
@@ -137,19 +136,27 @@
     </section>
     <section id="view-pro" class="view">
       <div class="pro-hero">
-        <p class="kicker">LAUNCH PACK · 7,99 €</p>
-        <h2>Non compri un PDF. Compri i sigilli.</h2>
+        <p class="kicker">LAUNCH PACK · 7,99 € una tantum</p>
+        <h2>Il 19 novembre<br>non partire a caso.</h2>
+        <p class="lead">Mentre gli altri aspettano il download, tu hai già console, piano e sala. Il gioco lo hanno tutti. Il primo giro no.</p>
         <ul class="perks">
-          <li><strong>Vault + sala + pin firmati</strong></li>
+          <li><strong>12 novembre</strong> — si apre il dossier preload: cosa scaricare, in che ordine, cosa non toccare la sera prima.</li>
+          <li><strong>19 novembre</strong> — si apre il piano delle prime 72 ore: prima notte, primo mezzo, primo giro utile.</li>
+          <li><strong>Sala chiusa</strong> — solo chi ha il pack. Niente commenti a caso sotto un Reel.</li>
+          <li><strong>Pin col tuo nome</strong> — sulla mappa si legge che l hai trovato tu.</li>
+          <li><strong>Alert</strong> — ti teniamo sul 12 e sul 19, non sul gossip.</li>
         </ul>
-        <div class="price"><strong>7,99 €</strong><span>pagamento Stripe · una tantum</span></div>
+        <div class="price"><strong>7,99 €</strong><span>una volta. Poi la console è tua su questo browser.</span></div>
         <div class="pin-form" style="margin:18px 0">
-          <h4>Paga e attiva</h4>
-          <input id="loginName" placeholder="Nome operatore" />
-          <input id="loginCode" placeholder="Codice pack che vuoi usare dopo" />
-          <button class="btn primary full" type="button" onclick="payWithStripe()">Paga 7,99 €</button>
-          <button class="btn ghost full" type="button" onclick="loginConsole()">Ho gia pagato, entra</button>
-          <p class="hint">Prima nome + codice, poi Stripe. Dopo il pagamento torni qui e la console si apre.</p>
+          <h4>1. Scegli identita</h4>
+          <label class="hint">Nome che apparira sui pin e in sala</label>
+          <input id="loginName" placeholder="Es. Enrico" />
+          <label class="hint">Codice tuo, servira per rientrare (min 4 caratteri)</label>
+          <input id="loginCode" placeholder="Es. VC72EN" />
+          <h4 style="margin-top:14px">2. Entra</h4>
+          <button class="btn primary full" type="button" onclick="payWithStripe()">Paga 7,99 € con Stripe</button>
+          <button class="btn ghost full" type="button" onclick="activatePack()">Attiva senza pagamento (mentre aspetti Stripe)</button>
+          <button class="btn ghost full" type="button" onclick="loginConsole()">Ho gia il pack, entra</button>
         </div>
       </div>
     </section>
