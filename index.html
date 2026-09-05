@@ -71,21 +71,51 @@
     </section>
     <section id="view-feed" class="view">
       <div class="race-hero">
-        <p class="kicker">STAGIONE 01 · SETTEMBRE</p>
-        <h2>Chi mappa Leonida<br>porta a casa il mese.</h2>
-        <p class="lead">Gift card PlayStation e codici sconto. Arrivano sulla email del 1°.</p>
+        <p class="kicker">GARA MENSILE</p>
+        <h2>Classifica pin</h2>
+        <p class="lead">Chi scopre più posti validi sulla mappa vince il mese.</p>
         <p id="raceYou" class="race-pos"></p>
-        <div id="raceCta" class="cta-row">
-          <button class="btn primary" type="button" onclick="show('pro')">Entra in gara · 7,99 €</button>
-          <button class="btn ghost" type="button" onclick="show('map')">Vedi la mappa</button>
-        </div>
-        <ul class="race-rules">
-          <li>Un pin vale quando viene validato.</li>
-          <li>Serve Launch Pack e un nome in Profilo.</li>
-          <li>Fine mese: 1° riceve il premio via email.</li>
-        </ul>
       </div>
-      <div id="raceBoard" class="race-board"></div>
+      <div class="race-grid">
+        <div>
+          <h3>Classifica</h3>
+          <div id="raceBoard" class="race-board"></div>
+        </div>
+        <aside class="race-aside">
+          <article class="hud">
+            <h3>Come si gioca</h3>
+            <ol class="race-ol">
+              <li>Compra il Launch Pack (7,99 €).</li>
+              <li>Metti il tuo nome in Profilo.</li>
+              <li>Apri Mappa, tocca un punto, dai un nome, Invia.</li>
+              <li>Se il pin è reale entra in classifica.</li>
+            </ol>
+            <button class="btn primary full" type="button" onclick="show('map')">Piazza un pin</button>
+          </article>
+          <article class="hud">
+            <h3>Regole</h3>
+            <ul class="race-rules">
+              <li>Contano solo i pin accettati.</li>
+              <li>Doppi e fake non valgono.</li>
+              <li>Reset il 1° di ogni mese.</li>
+            </ul>
+          </article>
+          <article class="hud">
+            <h3>Premio di settembre</h3>
+            <p>Gift card PlayStation o codice sconto, inviato via email al primo.</p>
+          </article>
+          <article class="hud" id="raceCta">
+            <h3>Launch Pack</h3>
+            <ul class="race-rules">
+              <li>Entri in questa gara</li>
+              <li>Guide 12 e 19 novembre</li>
+              <li>Cheat dal 19 novembre</li>
+              <li>Sala + pin col tuo nome</li>
+            </ul>
+            <button class="btn primary full" type="button" onclick="show('pro')">Sblocca pack 7,99 €</button>
+          </article>
+        </aside>
+      </div>
     </section>
     <section id="view-quiz" class="view">
       <div class="panel-head"><h2>Operatore</h2></div>
