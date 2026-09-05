@@ -244,3 +244,33 @@ function fakeCheckout() {
   toast("Pro in waitlist. Stripe al giorno 4.");
   localStorage.setItem("prime72_pro", "waitlist");
 } 
+async function loadPending() {
+  const secret = document.getElementById("adminSecret").value.trim();
+  const box = document.getElementById("adminList");
+  const { data, error } = await sb.rpc("list_pending", { secret: secret });
+  if (error) {
+    box.innerHTML = "<p>Accesso negato o errore: " + error.message + "</p>";
+    return;
+  }
+  if (!data || !data.length) {
+    box.innerHTML = "<p>Nessun pin in attesa.</p>";
+    return;
+  }
+  box.innerHTML = data.map(function (p) {
+    return '<article class="card" style="margin-bottom:10px"><h3>' + p.title +
+      "</h3><p>" + p.type + " · " + (p.note || "") +
+      "</p><button class='btn primary' type='button' onclick='modPin(\"" + p.id +
+      "\", true)'>Approva</button> <button class='btn ghost' type='button' onclick='modPin(\"" +
+      p.id + "\", false)'>Elimina</button></article>";
+  }).join("");
+}
+
+async function modPin(id, ok) {
+  const secret = document.getElementById("adminSecret").value.trim();
+  const { error } = await sb.rpc("set_pin_approved", { pid: id, secret: secret, ok: ok });
+  if (error) return toast(error.message);
+  toast(ok ? "Approvato" : "Eliminato");
+  loadPending();
+}
+
+if (location.hash === "#admin") show("admin");
