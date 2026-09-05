@@ -469,19 +469,25 @@ footer {
   padding: 8px 20px;
   font-size: 12px;
 }
+html {
+  background: #0a0612;
+}
 body {
-  background-image: none !important;
-  background-color: #0a0612 !important;
+  background: transparent !important;
+  position: relative;
+  isolation: isolate;
 }
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   background-image:
-    linear-gradient(180deg, rgba(10,6,18,.25) 0%, rgba(10,6,18,.55) 100%),
+    linear-gradient(180deg, rgba(10,6,18,.20) 0%, rgba(10,6,18,.45) 100%),
     url("bg.jpg.png");
   background-size: cover;
-  background-position: center 35%;
+  background-position: center 32%;
   background-repeat: no-repeat;
 }
+.noise { z-index: 1; }
+.top, main, footer { position: relative; z-index: 2; }
