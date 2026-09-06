@@ -7,11 +7,12 @@
   font-size: 14px;
 }
 @media (max-width: 900px) {
+  body:has(#view-pro.active) footer { display: none; }
   #view-pro {
-    padding: 10px 12px calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+    padding: 8px 12px 28px !important;
   }
   #view-pro h2 {
-    font-size: 32px !important;
+    font-size: 30px !important;
   }
   #view-pro .lead {
     margin: 6px 0 12px !important;
@@ -20,13 +21,11 @@
   #view-pro .pro-hero {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
   }
   #view-pro .pin-form {
     order: -1;
-    position: sticky;
-    top: 8px;
-    z-index: 4;
+    position: static;
     padding: 14px;
     background: rgba(12, 8, 20, .96);
   }
