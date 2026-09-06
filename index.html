@@ -141,9 +141,9 @@
         </label>
         <div class="id-fields">
           <label for="opName">Nome</label>
-          <input id="opName" autocomplete="off" placeholder="Come appari sui pin" />
+          <input id="opName" name="p72-op-name" autocomplete="off" placeholder="Inserisci nome" />
           <label for="opCrew">Tag crew</label>
-          <input id="opCrew" autocomplete="off" placeholder="Tag corto" />
+          <input id="opCrew" name="p72-op-crew" autocomplete="off" placeholder="Inserisci tag" />
           <button class="btn primary full" type="button" onclick="saveOperator()">Salva identità</button>
         </div>
       </div>
@@ -214,9 +214,9 @@
         <div class="pin-form" autocomplete="off">
           <h4 data-i18n="activate">Attiva la console</h4>
           <label class="hint" for="loginName">Inserisci nome utente</label>
-          <input id="loginName" name="p72-user" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Inserisci nome utente" />
+          <input id="loginName" name="p72-user" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Inserisci nome utente" value="" />
           <label class="hint" for="loginCode">Inserisci il tuo codice</label>
-          <input id="loginCode" name="p72-code" type="password" autocomplete="new-password" placeholder="Inserisci il tuo codice" />
+          <input id="loginCode" name="p72-code" type="password" autocomplete="new-password" placeholder="Inserisci il tuo codice" value="" />
           <button class="btn primary full" type="button" onclick="payWithStripe()" data-i18n="pay">Paga 4,99 € / mese</button>
           <button class="btn ghost full" type="button" onclick="loginConsole()" data-i18n="already">Ho gia l’abbonamento</button>
         </div>
@@ -275,5 +275,6 @@
   <script src="ops.js"></script>
   <script src="race.js"></script>
   <script src="stripe-buy.js"></script>
+  <script src="nofill.js"></script>
 </body>
 </html>
