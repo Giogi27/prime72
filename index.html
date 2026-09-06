@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="map-hud.css" />
+  <link rel="stylesheet" href="profile.css" />
 </head>
 <body>
   <div class="noise"></div>
@@ -128,13 +129,22 @@
       </div>
     </section>
     <section id="view-quiz" class="view">
-      <div class="panel-head"><h2 data-i18n="opTitle">Operatore</h2></div>
-      <div class="pin-form" style="max-width:520px">
-        <input id="opName" data-i18n-placeholder="streetName" placeholder="Nome in strada" />
-        <input id="opCrew" data-i18n-placeholder="crewTag" placeholder="Tag crew" />
-        <input id="opPhoto" type="file" accept="image/*" />
-        <div id="opPreview" class="op-preview"></div>
-        <button class="btn primary" type="button" onclick="saveOperator()" data-i18n="saveId">Salva identita</button>
+      <p class="kicker">IDENTITÀ</p>
+      <h2>Profilo</h2>
+      <p class="lead">Questo nome esce sui pin e in classifica.</p>
+      <div class="id-card">
+        <label class="id-photo">
+          <div id="opPreview" class="op-preview">72</div>
+          <input id="opPhoto" type="file" accept="image/*" hidden />
+          <span>Tocca per la foto</span>
+        </label>
+        <div class="id-fields">
+          <label for="opName">Nome</label>
+          <input id="opName" autocomplete="off" placeholder="Come appari sui pin" />
+          <label for="opCrew">Tag crew</label>
+          <input id="opCrew" autocomplete="off" placeholder="Tag corto" />
+          <button class="btn primary full" type="button" onclick="saveOperator()">Salva identità</button>
+        </div>
       </div>
       <div class="quiz" id="quizBox"></div>
     </section>
