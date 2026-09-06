@@ -206,42 +206,69 @@ footer { position: relative; text-align: center; color: #9a8aa8; font-size: 12px
     background-position: 58% 8%;
     background-size: auto 115%;
   }
-  body:has(#view-home.active) footer { display: none; }
+  body:has(#view-home.active) footer,
+  body:has(#view-map.active) footer { display: none; }
   .top {
     flex-wrap: wrap;
-    gap: 8px;
-    padding: 10px 12px 8px;
+    gap: 6px;
+    padding: 8px 10px calc(6px + env(safe-area-inset-top, 0px));
   }
+  .logo-mark { width: 36px; height: 36px; font-size: 18px; }
   .brand small { display: none; }
   .nav {
     width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 4px;
+    padding-bottom: 2px;
+    scrollbar-width: none;
   }
-  .nav button { padding: 7px 10px; font-size: 13px; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav button { padding: 6px 10px; font-size: 13px; }
   #langSel { flex-shrink: 0; }
   #view-home {
-    min-height: calc(100dvh - 110px);
-    padding: 12px 14px 0;
+    min-height: calc(100dvh - 100px);
+    padding: 10px 14px 0;
   }
   #view-feed, #view-quiz, #view-pro, #view-dash, #view-admin {
-    padding: 16px 14px 48px;
+    padding: 14px 12px calc(28px + env(safe-area-inset-bottom, 0px));
   }
-  h1 { font-size: 34px; }
-  h2 { font-size: 30px; }
-  .lead { font-size: 15px; margin: 10px 0 16px; }
-  .countdown { gap: 6px; }
-  .countdown div { min-width: 0; flex: 1; padding: 10px 4px; }
-  .countdown b { font-size: 22px; }
-  .cta-row .btn { flex: 1; text-align: center; }
+  h1 { font-size: 32px; }
+  h2 { font-size: 28px; }
+  .kicker { font-size: 10px; letter-spacing: .2em; }
+  .lead { font-size: 14px; margin: 8px 0 14px; }
+  .countdown { gap: 6px; margin-bottom: 16px; }
+  .countdown div { min-width: 0; flex: 1; padding: 8px 2px; border-radius: 12px; }
+  .countdown b { font-size: 20px; }
+  .countdown span { font-size: 9px; }
+  .cta-row { flex-wrap: nowrap; }
+  .cta-row .btn { flex: 1; text-align: center; padding: 11px 10px; font-size: 14px; }
+  .price strong { font-size: 40px; }
   .cockpit-top, .cockpit-body, .vault-grid, .tease,
   #view-pro .pro-hero { grid-template-columns: 1fr; }
+  .cockpit-who h2 { font-size: 28px; }
   .cockpit-pips { flex-wrap: wrap; }
+  .cockpit-pips div { min-width: 56px; }
+  .dash-actions { text-align: left; display: flex; gap: 8px; flex-wrap: wrap; }
   #view-pro .pin-form { position: static; }
-  .radar-bar { right: 12px; left: 12px; top: 10px; }
-  .map-stage { height: calc(100dvh - 96px); min-height: 420px; }
-  .map-dock { position: absolute; top: auto; left: 10px; right: 10px; bottom: 10px; width: auto; max-height: 38%; }
-  #adminMap { height: 200px; }
+  .map-stage {
+    height: calc(100dvh - 108px) !important;
+    min-height: 0 !important;
+  }
+  .radar-bar {
+    top: 8px; left: 8px; right: 8px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  .map-dock {
+    top: auto; left: 8px; right: 8px;
+    bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+    width: auto;
+    max-height: 26%;
+    padding: 10px;
+  }
+  #adminMap { height: 180px; }
   .ops-kpis { grid-template-columns: 1fr 1fr; }
+  .ops-lock { flex-wrap: wrap; width: 100%; }
+  .ops-lock input { min-width: 0; width: 100%; }
+  #toast { width: calc(100% - 24px); text-align: center; bottom: 16px; }
 }
