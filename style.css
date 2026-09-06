@@ -201,7 +201,12 @@ footer { position: relative; text-align: center; color: #9a8aa8; font-size: 12px
 .crate h4 { font-size: 15px; margin: 4px 0 6px; }
 .crate .seal { font-size: 11px; letter-spacing: .12em; color: var(--gold); text-transform: uppercase; }
 @media (max-width: 900px) {
-  html { background-attachment: scroll; background-position: center 18%; }
+  html {
+    background-attachment: scroll;
+    background-position: 58% 8%;
+    background-size: auto 115%;
+  }
+  body:has(#view-home.active) footer { display: none; }
   .top {
     flex-wrap: wrap;
     gap: 8px;
@@ -216,17 +221,20 @@ footer { position: relative; text-align: center; color: #9a8aa8; font-size: 12px
   }
   .nav button { padding: 7px 10px; font-size: 13px; }
   #langSel { flex-shrink: 0; }
-  #view-home, #view-feed, #view-quiz, #view-pro, #view-dash, #view-admin {
+  #view-home {
+    min-height: calc(100dvh - 110px);
+    padding: 12px 14px 0;
+  }
+  #view-feed, #view-quiz, #view-pro, #view-dash, #view-admin {
     padding: 16px 14px 48px;
   }
-  h1 { font-size: 36px; }
+  h1 { font-size: 34px; }
   h2 { font-size: 30px; }
   .lead { font-size: 15px; margin: 10px 0 16px; }
   .countdown { gap: 6px; }
   .countdown div { min-width: 0; flex: 1; padding: 10px 4px; }
   .countdown b { font-size: 22px; }
   .cta-row .btn { flex: 1; text-align: center; }
-  footer { padding: 8px 14px 28px; }
   .cockpit-top, .cockpit-body, .vault-grid, .tease,
   #view-pro .pro-hero { grid-template-columns: 1fr; }
   .cockpit-pips { flex-wrap: wrap; }
