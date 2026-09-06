@@ -43,16 +43,13 @@ function restyleMap(target) {
       attribution: "Esri",
       maxZoom: 18
     }).addTo(target);
-    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Reference_Overlay/MapServer/tile/{z}/{y}/{x}", {
-      opacity: 0.65,
-      maxZoom: 18
-    }).addTo(target);
     target.setMinZoom(10);
     target.setMaxZoom(18);
     target.setMaxBounds(null);
   }
   ensureGps();
   ensureNight();
+  if (typeof addCityLabels === "function") addCityLabels(target);
   if (!target._gps) {
     target._gps = true;
     target.on("mousemove", function (e) {
