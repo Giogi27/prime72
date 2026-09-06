@@ -1,0 +1,35 @@
+@media (max-width: 900px) {
+  body:has(#view-home.active) {
+    min-height: 100dvh;
+  }
+  #view-home {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: calc(100dvh - 96px);
+    padding: 12px 16px 28px !important;
+  }
+  #view-home h1 {
+    font-size: 42px !important;
+    max-width: 12ch;
+  }
+  #view-home .lead {
+    max-width: 34ch;
+    font-size: 15px !important;
+  }
+  #view-home .countdown div {
+    min-height: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #view-home .cta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  #view-home .cta-row .btn {
+    min-height: 48px;
+    font-size: 15px !important;
+  }
+}
