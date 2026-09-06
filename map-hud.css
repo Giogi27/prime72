@@ -99,16 +99,29 @@
   padding: 6px 8px;
   font: 600 12px Outfit, sans-serif;
 }
+#opPhoto::file-selector-button {
+  background: #1c1226;
+  color: #f6f0ff;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  padding: 8px 14px;
+  margin-right: 10px;
+  font: 600 13px Outfit, sans-serif;
+}
 @media (max-width: 800px) {
   .race-grid { grid-template-columns: 1fr; }
   html:has(#view-map.active),
   body:has(#view-map.active) {
     background: #071018 !important;
     background-image: none !important;
+    overflow: hidden;
   }
-  body:has(#view-map.active) .top { position: relative; }
+  body:has(#view-map.active) .top {
+    position: sticky !important;
+    top: 0;
+  }
   .map-stage {
-    height: calc(100dvh - 118px) !important;
+    height: calc(100dvh - 104px) !important;
     min-height: 0 !important;
   }
   .radar-bar {
@@ -117,30 +130,28 @@
     top: 8px !important;
     flex-wrap: nowrap;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .radar-bar button { flex-shrink: 0; }
   .map-dock {
-    max-height: 28% !important;
-    padding: 10px 12px !important;
+    max-height: 198px !important;
+    height: auto !important;
+    padding: 10px 12px 12px !important;
     bottom: 8px !important;
     left: 8px !important;
     right: 8px !important;
+    overflow: hidden !important;
   }
   .map-dock h4,
   .map-dock #radarCount,
-  .map-dock #radarList { display: none; }
-  .map-dock textarea { display: none; }
-  .map-dock .hint { display: none; }
-  .gps-hud {
-    left: 8px;
-    bottom: auto;
-    top: 48px;
-    font-size: 13px;
-    padding: 5px 8px;
-    z-index: 8;
-  }
+  .map-dock #radarList,
+  .map-dock textarea,
+  .map-dock .hint { display: none !important; }
+  .map-dock input,
+  .map-dock select { margin: 0 0 8px !important; }
+  .gps-hud { display: none !important; }
   #map .leaflet-control-zoom {
-    margin: 88px 0 0 8px !important;
+    margin: 52px 0 0 8px !important;
   }
 }
 .ops-wrap {
