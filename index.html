@@ -199,12 +199,12 @@
           </ul>
           <div class="price"><strong>4,99 €</strong><span data-i18n="month">al mese</span></div>
         </div>
-        <div class="pin-form">
+        <div class="pin-form" autocomplete="off">
           <h4 data-i18n="activate">Attiva la console</h4>
-          <label class="hint" data-i18n="namePins">Nome sui pin e in sala</label>
-          <input id="loginName" placeholder="Enrico" />
-          <label class="hint" data-i18n="codeBack">Codice per rientrare (min 4)</label>
-          <input id="loginCode" placeholder="VC72EN" />
+          <label class="hint" for="loginName">Inserisci nome utente</label>
+          <input id="loginName" name="p72-user" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Inserisci nome utente" />
+          <label class="hint" for="loginCode">Inserisci il tuo codice</label>
+          <input id="loginCode" name="p72-code" type="password" autocomplete="new-password" placeholder="Inserisci il tuo codice" />
           <button class="btn primary full" type="button" onclick="payWithStripe()" data-i18n="pay">Paga 4,99 € / mese</button>
           <button class="btn ghost full" type="button" onclick="loginConsole()" data-i18n="already">Ho gia l’abbonamento</button>
         </div>
