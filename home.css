@@ -2,7 +2,7 @@
   body:has(#view-home.active) {
     min-height: 100dvh;
   }
-  #view-home {
+  #view-home.active {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
