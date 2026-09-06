@@ -1,0 +1,43 @@
+#view-pro .pro-hero {
+  align-items: start;
+}
+#view-pro .perks li {
+  padding: 8px 12px;
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+@media (max-width: 900px) {
+  #view-pro {
+    padding: 10px 12px calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  #view-pro h2 {
+    font-size: 32px !important;
+  }
+  #view-pro .lead {
+    margin: 6px 0 12px !important;
+    font-size: 14px !important;
+  }
+  #view-pro .pro-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  #view-pro .pin-form {
+    order: -1;
+    position: sticky;
+    top: 8px;
+    z-index: 4;
+    padding: 14px;
+    background: rgba(12, 8, 20, .96);
+  }
+  #view-pro .pin-form input {
+    min-height: 44px;
+    margin: 4px 0 8px;
+  }
+  #view-pro .price strong {
+    font-size: 36px;
+  }
+  #view-pro .btn.full {
+    min-height: 48px;
+  }
+}
